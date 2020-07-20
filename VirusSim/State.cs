@@ -29,5 +29,7 @@ namespace VirusSim
 
         SE, //South-East
 
+        Blocked, //Blocked
+
     }
 }
