@@ -6,7 +6,8 @@ namespace VirusSim
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Simulation sim = new Simulation();
+            sim.Start();
         }
     }
 }
