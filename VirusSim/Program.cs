@@ -6,7 +6,12 @@ namespace VirusSim
     {
         static void Main(string[] args)
         {
-            Board(5);
+            UserInterface ui = new UserInterface();
+
+            Grid(5);
+            ui.CreateGrid(Grid.Grid);
+
+
         }
     }
 }
