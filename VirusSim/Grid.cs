@@ -1,3 +1,5 @@
+using System;
+
 namespace VirusSim
 {
     public class Grid
@@ -6,11 +8,19 @@ namespace VirusSim
 
         public int turn;
 
-        public Grid(int size)
+        public CreateGrid(int size, int agents)
         {
             state = new State[size,size];
 
-            turn = 0;
+            for (int i = 0; i < agents; i++)
+            {
+                int aux1 = Random.Next(0, size);
+                int aux2 = Random.Next(0, size);
+
+                state[aux1,aux2] = State.H; 
+            }
+
+
         }
     }
 }

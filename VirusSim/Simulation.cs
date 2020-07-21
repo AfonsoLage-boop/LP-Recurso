@@ -4,10 +4,14 @@ namespace VirusSim
 {
     public class Simulation
     {
+        private Grid grid;
+        private UserInterface ui;
+
         public Simulation(int size)
         {
-            // grid = new Grid(size);
-            // ui = new UserInterface();
+            grid.Grid(size);
+
+            ui.CreateGrid(grid, size);
         }
 
         public void Start(int agents, int health, int infection, int turns, 
