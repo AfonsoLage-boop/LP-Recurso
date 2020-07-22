@@ -57,8 +57,8 @@ namespace VirusSim
                 i++;
             }
 
-            if (size != 0 && agents != 0 && health != 0 && infection != 0 && 
-            turns != 0)
+            if (size > 0 && agents > 0 && health > 0 && infection > 0 && 
+            turns > 0)
             {
                 Simulation sim = new Simulation(size);
                 sim.Start(agents, health, infection, turns, view, save);

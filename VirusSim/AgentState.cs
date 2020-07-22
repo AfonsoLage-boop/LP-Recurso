@@ -1,6 +1,6 @@
 namespace VirusSim
 {
-    public enum State
+    public enum AgentState
     {
         Healthy,
 
