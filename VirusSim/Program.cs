@@ -14,36 +14,43 @@ namespace VirusSim
             int i = 0;
             while (i < args.Length)
             {
-                if (args[i].Equals("-n", StringComparison.InvariantCultureIgnoreCase))
+                if (args[i].Equals("-n",
+                StringComparison.InvariantCultureIgnoreCase))
                 {
                     size = int.Parse(args[++i]);
                     continue;
                 }
-                else if (args[i].Equals("-m", StringComparison.InvariantCultureIgnoreCase))
+                else if (args[i].Equals("-m",
+                StringComparison.InvariantCultureIgnoreCase))
                 {
                     agents = int.Parse(args[++i]);
                     continue;
                 }
-                else if (args[i].Equals("-l", StringComparison.InvariantCultureIgnoreCase))
+                else if (args[i].Equals("-l",
+                StringComparison.InvariantCultureIgnoreCase))
                 {
                     health = int.Parse(args[++i]);
                     continue;
                 }
-                else if (args[i].Equals("-tinf", StringComparison.InvariantCultureIgnoreCase))
+                else if (args[i].Equals("-tinf",
+                StringComparison.InvariantCultureIgnoreCase))
                 {
                     infection = int.Parse(args[++i]);
                     continue;
                 }
-                else if (args[i].Equals("-t", StringComparison.InvariantCultureIgnoreCase))
+                else if (args[i].Equals("-t",
+                StringComparison.InvariantCultureIgnoreCase))
                 {
                     turns = int.Parse(args[++i]);
                     continue;
                 }
-                else if (args[i].Equals("-v", StringComparison.InvariantCultureIgnoreCase))
+                else if (args[i].Equals("-v",
+                StringComparison.InvariantCultureIgnoreCase))
                 {
                     view = true;
                 }
-                else if (args[i].Equals("-o", StringComparison.InvariantCultureIgnoreCase))
+                else if (args[i].Equals("-o",
+                StringComparison.InvariantCultureIgnoreCase))
                 {
                     save = true;
                 }
