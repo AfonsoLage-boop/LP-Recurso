@@ -1,13 +1,16 @@
+using System;
+
 namespace VirusSim
 {
     public class Grid
     {
         private State[,] state;
+        private Variables v;
 
-        public Grid(int size)
+        public Grid(Variables v)
         {
-            state = new State[size,size];
-
+            this.v = v;
+            state = new State[v.Size, v.Size];
         }
     }
 }
