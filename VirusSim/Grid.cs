@@ -18,7 +18,10 @@ namespace VirusSim
                 int aux2 = Random.Next(0, size);
 
                 state[aux1,aux2] = State.H; 
+                // Arranjar uma forma de os guardar 
             }
+
+            //Atribuir o state a um dos gajos healthy
 
 
         }
