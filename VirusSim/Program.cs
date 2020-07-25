@@ -7,63 +7,14 @@ namespace VirusSim
         static void Main(string[] args)
         {
             UserInterface ui = new UserInterface();
+            Variables     v  = new Variables();
 
-            int size = 0, agents = 0, health = 0, infection = 0, turns = 0;
-            bool view = false, save = false;
-
-            int i = 0;
-            while (i < args.Length)
+            if (v.ValidateVars(args))
             {
-                if (args[i].Equals("-n", 
-                StringComparison.InvariantCultureIgnoreCase))
-                {
-                    size = int.Parse(args[++i]);
-                    continue;
-                }
-                else if (args[i].Equals("-m", 
-                StringComparison.InvariantCultureIgnoreCase))
-                {
-                    agents = int.Parse(args[++i]);
-                    continue;
-                }
-                else if (args[i].Equals("-l", 
-                StringComparison.InvariantCultureIgnoreCase))
-                {
-                    health = int.Parse(args[++i]);
-                    continue;
-                }
-                else if (args[i].Equals("-tinf", 
-                StringComparison.InvariantCultureIgnoreCase))
-                {
-                    infection = int.Parse(args[++i]);
-                    continue;
-                }
-                else if (args[i].Equals("-t", 
-                StringComparison.InvariantCultureIgnoreCase))
-                {
-                    turns = int.Parse(args[++i]);
-                    continue;
-                }
-                else if (args[i].Equals("-v", 
-                StringComparison.InvariantCultureIgnoreCase))
-                {
-                    view = true;
-                }
-                else if (args[i].Equals("-o", 
-                StringComparison.InvariantCultureIgnoreCase))
-                {
-                    save = true;
-                }
-                i++;
+                Simulation sim = new Simulation(v);
+                sim.Start();
             }
-
-            if (size != 0 && agents != 0 && health != 0 && infection != 0 && 
-            turns != 0)
-            {
-                Simulation sim = new Simulation(size);
-                sim.Start(agents, health, infection, turns, view, save);
-            }
-            else
+            else 
             {
                 ui.InsufArgs();
             }

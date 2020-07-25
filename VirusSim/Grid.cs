@@ -5,6 +5,7 @@ namespace VirusSim
     public class Grid
     {
         private State[,] state;
+        private Variables v;
 
         public int turn;
 
@@ -23,7 +24,11 @@ namespace VirusSim
 
             //Atribuir o state a um dos gajos healthy
 
-
+        }
+        public Grid(Variables v)
+        {
+            this.v = v;
+            state = new State[v.Size, v.Size];
         }
     }
 }

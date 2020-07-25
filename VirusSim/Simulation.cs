@@ -6,25 +6,26 @@ namespace VirusSim
     {
         private Grid grid;
         private UserInterface ui;
-
-        public Simulation(int size)
+        private Variables v;
+        
+        public Simulation(Variables v)
         {
-            grid.Grid(size);
-
-            ui.CreateGrid(grid, size);
+            this.v = v;
+            grid = new Grid(v);
+            ui   = new UserInterface();
         }
 
-        public void Start(int agents, int health, int infection, int turns, 
-        bool view, bool save)
+        public void Start()
         {
             //DEBUG
-            Console.WriteLine("Simulation Started.");
-            Console.WriteLine($"Agents    = {agents}");
-            Console.WriteLine($"Health    = {health}");
-            Console.WriteLine($"Infection = {infection}");
-            Console.WriteLine($"Turns     = {turns}");
-            Console.WriteLine($"View      = {view}");
-            Console.WriteLine($"Save      = {save}");
+            Console.WriteLine("\nSimulation Started.");
+            Console.WriteLine($"Size           = {v.Size}");
+            Console.WriteLine($"Agents         = {v.Agents}");
+            Console.WriteLine($"AgentsHP       = {v.AgentsHP}");
+            Console.WriteLine($"Infection Turn = {v.TInfect}");
+            Console.WriteLine($"Turns          = {v.Turns}");
+            Console.WriteLine($"View           = {v.View}");
+            Console.WriteLine($"Save           = {v.Save}");
         }
     }
 }
