@@ -14,11 +14,10 @@ namespace VirusSim
 
         public Agent ( Coords Pos, State HeIs, Grid grid)
         {
-            Pos = pos;
-            HeIs = heis;
-            
-            
 
+            
+            
+            
 
         }
 
