@@ -2,11 +2,8 @@ namespace VirusSim
 {
     public class Coords
     {
-        
-        public int X {get ; }
-
-        public int Y {get ; }
-
+        public int X {get ;}
+        public int Y {get ;}
 
         public Coords(int x, int y)
         {
@@ -14,5 +11,6 @@ namespace VirusSim
             Y = y;
         }
 
+        public override string ToString() => $"({X},{Y})";
     }
 }
