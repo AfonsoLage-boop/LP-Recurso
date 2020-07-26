@@ -37,7 +37,7 @@ namespace VirusSim
             int countDead     = 0;
             foreach (Agent agent in allAgents)
             {
-                Console.WriteLine($"(D) Agent {agent.ID} is at: {agent.Pos}");
+                Console.WriteLine($"{agent}");
             }
 
             // Current simulation turn
