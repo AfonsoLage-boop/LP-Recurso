@@ -6,22 +6,48 @@ namespace VirusSim
     {
         public int ID {get ; }
 
-        public Coords Pos { get ; private set; }
+        // public Coords Pos { get ; private set; }
 
-        public State HeIs {get; private set; }
+        public State Status {get; private set; }
 
-        private Grid grid;
+        private Variables v; 
 
-        public Agent ( Coords Pos, State HeIs, Grid grid)
+        //private Grid grid;
+
+         public Agent(Variables v)
         {
-
-            
-            
-            
-
+            this.v = v;
         }
 
 
 
+        public void Agents ()
+        {
+            
+            for (int i = 0; i < v.Agents; i++)
+            {
+                
+                Console.WriteLine("Banana");
+                
+                
+                /*switch (Status)
+                {
+                    case State.Healthy:
+                        
+                        Console.WriteLine("Yep está curado");
+                        break;
+                    case State.Infected:
+
+                        Console.WriteLine("This isn't suppost to appear");
+                        break;
+                    default:
+                        break;
+                }*/
+            } 
+            
+
+        }
     }
+
+
 }

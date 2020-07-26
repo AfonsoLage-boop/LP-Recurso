@@ -7,12 +7,15 @@ namespace VirusSim
         private Grid grid;
         private UserInterface ui;
         private Variables v;
+
+        private Agent agent;
         
         public Simulation(Variables v)
         {
             this.v = v;
             grid = new Grid(v);
             ui   = new UserInterface();
+            agent = new Agent(v);
         }
 
         public void Start()
@@ -26,7 +29,7 @@ namespace VirusSim
             Console.WriteLine($"Turns          = {v.Turns}");
             Console.WriteLine($"View           = {v.View}");
             Console.WriteLine($"Save           = {v.Save}\n\n");
-
+            agent.Agents();
             // Debug variable. agentsAlive will have to be a list of some sort
             int agentsAlive = v.Agents;
             
@@ -61,6 +64,7 @@ namespace VirusSim
 
                 // DEBUG LINES
                 Console.WriteLine($"Current Turn: {currentTurn}");
+                
 
                 // Increase current turn value by one
                 currentTurn++;

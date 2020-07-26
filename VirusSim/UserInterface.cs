@@ -25,21 +25,6 @@ namespace VirusSim
             
         }
 
-        public void DrawGrid(Grid grid)
-        {
-            for (int i = 0; i < size; i++)
-            {
-                for (int j = 0; j < size; j++)
-                {
-
-                    if (j < 2) Console.Write("|");
-
-                }
-                if (i < 2) Console.WriteLine("\n---+---+---");
-            }
-            Console.WriteLine();
-        }
-
 
     }
 }
