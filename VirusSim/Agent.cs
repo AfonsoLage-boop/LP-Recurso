@@ -7,7 +7,7 @@ namespace VirusSim
     {
         public int ID {get ; }
 
-        // public Coords Pos { get ; private set; }
+        public Coords Pos { get ; private set; }
 
         public State Status {get; private set; }
 
@@ -15,9 +15,11 @@ namespace VirusSim
 
         //private Grid grid;
 
-         public Agent(Variables v)
+         public Agent(int id, Coords pos, State Status)
         {
-            this.v = v;
+      
+            ID = id;
+            Pos = pos;
         }
 
         public void CreateAgents ()

@@ -9,14 +9,46 @@ namespace VirusSim
         private Variables v;
 
         private Agent agent;
+
+        private Random random;
+
+        private State status;
+
+        private Agent[] agents;
         
         public Simulation(Variables v)
         {
             this.v = v;
             grid = new Grid(v);
             ui   = new UserInterface();
-            agent = new Agent(v);
+            //agent = new Agent(v);
         }
+
+
+        private void NewAgent(State status, int id)
+        {
+            
+            Coords pos;
+           
+            Agent agent;
+
+            // Escolher um local aleatório desocupado para colocar o agente
+            do
+            {
+                pos = new Coords(
+                    random.Next((int)v.Size),
+                    random.Next((int)v.Size));
+                
+                
+            } while (world.IsOccupied(pos));
+
+            // Instanciar novo agente
+            agent = new Agent(id, pos, status);
+
+            // Guardar agente no array de agentes
+            agents[id] = agent;
+        }
+
 
         public void Start()
         {
@@ -29,7 +61,7 @@ namespace VirusSim
             Console.WriteLine($"Turns          = {v.Turns}");
             Console.WriteLine($"View           = {v.View}");
             Console.WriteLine($"Save           = {v.Save}\n\n");
-            agent.CreateAgents();
+            //agent.CreateAgents();
             // Debug variable. agentsAlive will have to be a list of some sort
             int agentsAlive = v.Agents;
             

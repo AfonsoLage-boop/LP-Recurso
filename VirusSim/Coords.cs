@@ -14,7 +14,5 @@ namespace VirusSim
             Y = y;
         }
 
-
-
     }
 }
