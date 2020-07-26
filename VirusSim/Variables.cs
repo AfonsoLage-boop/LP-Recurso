@@ -4,13 +4,13 @@ namespace VirusSim
 {
     public struct Variables
     {
-        public int  Size       {get; private set;}
-        public int  Agents     {get; private set;}
-        public int  AgentsHP   {get; private set;}
-        public int  TInfect    {get; private set;}
-        public int  Turns      {get; private set;}
-        public bool View       {get; private set;}
-        public bool Save       {get; private set;}
+        public int  Size     {get; private set;}
+        public int  Agents   {get; private set;}
+        public int  AgentsHP {get; private set;}
+        public int  TInfect  {get; private set;}
+        public int  Turns    {get; private set;}
+        public bool View     {get; private set;}
+        public bool Save     {get; private set;}
 
         private Variables(int size, int agents, int agentsHP, int tInfect,
             int turns, bool view, bool save)
