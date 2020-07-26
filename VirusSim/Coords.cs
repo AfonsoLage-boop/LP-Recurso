@@ -11,6 +11,9 @@ namespace VirusSim
             Y = y;
         }
 
-        public override string ToString() => $"({X},{Y})";
+        public override string ToString()
+        {
+            return $"({X,2},{Y,2})";
+        }
     }
 }
