@@ -14,7 +14,7 @@ namespace VirusSim
             State     = State.Healthy;
             this.grid = grid;
 
-            grid.PlaceAgent(Agent Agent);
+            grid.PlaceAgent(this);
         }
 
         private void infected()
