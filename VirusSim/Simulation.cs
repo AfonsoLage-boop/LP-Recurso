@@ -6,29 +6,39 @@ namespace VirusSim
 {
     public class Simulation
     {
-        private Grid grid;
-        private UserInterface ui;
         private Variables v;
-        // private Random random;
-        // private State status;
-        // private Agent[] agents;
+        private UserInterface ui;
+        private Grid grid;
+        private Agent[] allAgents;
+        private Random rand;
         
         public Simulation(Variables v)
         {
-            this.v = v;
-            grid = new Grid(v);
-            ui   = new UserInterface();
-            //agent = new Agent(v);
+            this.v    = v;
+            ui        = new UserInterface();
+            grid      = new Grid((int)v.Size, (int)v.Size);
+            
+            allAgents = new Agent[v.Agents];
+            rand      = new Random();
+
+            for (int i = 1; i <= v.Agents; i++)
+            {
+                CreateAgent((int)i);
+            }
         }
 
         public void Start()
         {
-            // Simulation Data (Test Variables)
+            // DEBUG BLOCK
             int countAlive    = v.Agents;
             int countHealthy  = v.Agents;
             int countInfected = 0;
             int countDead     = 0;
-            
+            foreach (Agent agent in allAgents)
+            {
+                Console.WriteLine($"(D) Agent {agent.ID} is at: {agent.Pos}");
+            }
+
             // Current simulation turn
             int currentTurn = 1;
 
@@ -58,6 +68,9 @@ namespace VirusSim
 
                 // Count Healthy, Infected and Dead agents
                 // If v.Save == True, info is saved to be exported
+
+
+
                 countHealthy  = countHealthy - 2;  ///////////////
                 countInfected = countInfected + 2; //  TESTING  //
                 countDead     = countDead + 1;     // VARIABLES //
@@ -90,25 +103,17 @@ namespace VirusSim
             }
         }
 
-        // private void NewAgent(State status, int id)
-        // {
-        //     Coords pos;
-        //     Agent agent;
+        private void CreateAgent(int id)
+        {
+            Coords pos;
+            Agent agent;
 
-        //     do
-        //     {
-        //         pos = new Coords(
-        //             random.Next((int)v.Size),
-        //             random.Next((int)v.Size));
-                
-                
-        //     } while (world.IsOccupied(pos));
+            pos   = new Coords(rand.Next((int)v.Size), rand.Next((int)v.Size));
 
-  
-        //     agent = new Agent(id, pos, status);
+            agent = new Agent(id, pos, grid);
 
-        //     agents[id] = agent;
-        // }
+            allAgents[id-1] = agent;
+        }
 
         // Separates and returns each turn's data with tabs
         private string DataLine(int countHealthy, int countInfected, 

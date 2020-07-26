@@ -29,13 +29,12 @@ namespace VirusSim
             Console.WriteLine($"// {agents} Healthy agents\n");
         }
 
-        public void ShowStats(int currentTurn, int countHealthy, 
-                              int countInfected, int countDead)
+        public void ShowStats(int turn, int healthy, int infected, int dead)
         {
-            string t = String.Format("{0,-4}",currentTurn);
-            string h = String.Format("{0,4}",countHealthy);
-            string i = String.Format("{0,4}",countInfected);
-            string d = String.Format("{0,4}",countDead);
+            string t = String.Format("{0,-4}",turn);
+            string h = String.Format("{0,4}",healthy);
+            string i = String.Format("{0,4}",infected);
+            string d = String.Format("{0,4}",dead);
             
             Console.WriteLine("// TURN " + t + " >> " + h + " Healthy | " + i +
                               " Infected | " + d + " Dead");
