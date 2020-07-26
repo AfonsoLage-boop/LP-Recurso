@@ -12,5 +12,13 @@ namespace VirusSim
             this.v = v;
             state = new State[v.Size, v.Size];
         }
+
+
+        public void PlaceAgent(Agent agent)
+        {
+            state[agent.Pos.X, agent.Pos.Y] = State.Healthy;
+
+        }
+
     }
 }

@@ -13,11 +13,12 @@ namespace VirusSim
 
         private Variables v; 
 
-        //private Grid grid;
+        private Grid grid;
 
-        public Agent(int id, Coords pos, State Status)
-        {;
-            ID = id;
+        public Agent(Variables v, Coords pos, State Status)
+        {
+            this.v = v;
+            //ID = id;
             Pos = pos;
         }
 
@@ -29,6 +30,10 @@ namespace VirusSim
                 
                 Status = State.Healthy;
                 
+                grid.PlaceAgent(this);
+
+                Console.WriteLine($"Here is pos{Pos}");
+
                 switch (Status)
                 {
                     case State.Healthy:
@@ -37,7 +42,7 @@ namespace VirusSim
                         break;
                     case State.Infected:
 
-                        Console.WriteLine("Zombie Guy");
+                        Console.WriteLine("Corona Guy");
                         break;
 
                 }

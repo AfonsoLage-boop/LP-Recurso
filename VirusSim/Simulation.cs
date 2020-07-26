@@ -9,16 +9,18 @@ namespace VirusSim
         private Grid grid;
         private UserInterface ui;
         private Variables v;
-        // private Random random;
-        // private State status;
-        // private Agent[] agents;
-        
+        private Random random;
+        private State status;
+        private Agent[] agents;
+        private Agent agent;
+        private Coords pos;
+
         public Simulation(Variables v)
         {
             this.v = v;
             grid = new Grid(v);
             ui   = new UserInterface();
-            //agent = new Agent(v);
+            agent = new Agent(v, pos, status);
         }
 
         public void Start()
@@ -78,7 +80,7 @@ namespace VirusSim
 
                 // Increase current turn value by one
                 currentTurn++;
-            }
+            }   
 
             // If v.Save == True, export all data to a TSV file
             if (v.Save)
@@ -90,25 +92,25 @@ namespace VirusSim
             }
         }
 
-        // private void NewAgent(State status, int id)
-        // {
-        //     Coords pos;
-        //     Agent agent;
+        private void NewAgent()
+        {
+            Coords pos;
+            Agent agent;
 
-        //     do
-        //     {
-        //         pos = new Coords(
-        //             random.Next((int)v.Size),
-        //             random.Next((int)v.Size));
-                
-                
-        //     } while (world.IsOccupied(pos));
+            
+            for (int i = 0; i < v.Agents; i++)
+            {
+                pos = new Coords(
+                    random.Next((int)v.Size), random.Next((int)v.Size));
+           
 
   
-        //     agent = new Agent(id, pos, status);
+                agent = new Agent(v, pos, status);
+            
+                //agents[id] = agent;
 
-        //     agents[id] = agent;
-        // }
+            }
+        }
 
         // Separates and returns each turn's data with tabs
         private string DataLine(int countHealthy, int countInfected, 
