@@ -15,9 +15,8 @@ namespace VirusSim
 
         //private Grid grid;
 
-         public Agent(int id, Coords pos, State Status)
-        {
-      
+        public Agent(int id, Coords pos, State Status)
+        {;
             ID = id;
             Pos = pos;
         }

@@ -4,16 +4,16 @@ namespace VirusSim
 {
     public struct Variables
     {
-        public int  Size       {get; private set;}
-        public int  Agents     {get; private set;}
-        public int  AgentsHP   {get; private set;}
-        public int  TInfect    {get; private set;}
-        public int  Turns      {get; private set;}
-        public bool View       {get; private set;}
-        public bool Save       {get; private set;}
+        public int  Size     {get; private set;}
+        public int  Agents   {get; private set;}
+        public int  AgentsHP {get; private set;}
+        public int  TInfect  {get; private set;}
+        public int  Turns    {get; private set;}
+        public bool View     {get; private set;}
+        public bool Save     {get; private set;}
 
         private Variables(int size, int agents, int agentsHP, int tInfect,
-            int turns, bool view, bool save)
+                          int turns, bool view, bool save)
         {
             Size     = size;
             Agents   = agents;
@@ -30,42 +30,42 @@ namespace VirusSim
             while (i < args.Length)
             {
                 if (args[i].Equals("-n",
-                StringComparison.InvariantCultureIgnoreCase))
+                    StringComparison.InvariantCultureIgnoreCase))
                 {
                     Size = int.Parse(args[++i]);
                     continue;
                 }
                 else if (args[i].Equals("-m",
-                StringComparison.InvariantCultureIgnoreCase))
+                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     Agents = int.Parse(args[++i]);
                     continue;
                 }
                 else if (args[i].Equals("-l",
-                StringComparison.InvariantCultureIgnoreCase))
+                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     AgentsHP = int.Parse(args[++i]);
                     continue;
                 }
                 else if (args[i].Equals("-tinf",
-                StringComparison.InvariantCultureIgnoreCase))
+                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     TInfect = int.Parse(args[++i]);
                     continue;
                 }
                 else if (args[i].Equals("-t",
-                StringComparison.InvariantCultureIgnoreCase))
+                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     Turns = int.Parse(args[++i]);
                     continue;
                 }
                 else if (args[i].Equals("-v",
-                StringComparison.InvariantCultureIgnoreCase))
+                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     View = true;
                 }
                 else if (args[i].Equals("-o",
-                StringComparison.InvariantCultureIgnoreCase))
+                         StringComparison.InvariantCultureIgnoreCase))
                 {
                     Save = true;
                 }
@@ -73,7 +73,7 @@ namespace VirusSim
             }
 
             if (Size > 0 && Agents > 0 && AgentsHP > 0 && TInfect > 0 && 
-            Turns > 0)
+                Turns > 0)
             {
                 return true;
             }

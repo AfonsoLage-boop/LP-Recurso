@@ -6,22 +6,39 @@ namespace VirusSim
     {
         public void InsufArgs()
         {
-            Console.WriteLine("\n!! ERRO !!");
-            Console.WriteLine("Argumentos Insuficientes passados na linha de"  +
-            " comando.");
-            Console.WriteLine("\nPara iniciar a simulacao sao obrigatorios " +
-            "indicar:");
-            Console.WriteLine("-N    => dimensoes da grelha;");
-            Console.WriteLine("-M    => agentes iniciais;");
-            Console.WriteLine("-L    => vida de cada agente (em turnos)");
-            Console.WriteLine("-Tinf => turno da primeira infecao");
-            Console.WriteLine("-T    => duracao da simulacao (em turnos)");
-            Console.WriteLine("(Seguidos de um valor inteiro maior do que 0 e" +
-            " separado por espaco)");
-            Console.WriteLine("\nOpcionalmente:");
-            Console.WriteLine("-v    => ativar visualizacao em consola");
-            Console.WriteLine("-o    => gravar estatisticas num ficheiro, " + 
-            "indicando o mesmo a frente");
+            Console.WriteLine("\n!! ERROR !!");
+            Console.WriteLine("Insufficient arguments passed in command line.");
+            Console.WriteLine("\nTo start the simulation I need to know:");
+            Console.WriteLine("-N    => grid dimensions (N x N);");
+            Console.WriteLine("-M    => number of agents;");
+            Console.WriteLine("-L    => agents' health (turns)");
+            Console.WriteLine("-Tinf => first infected (turn)");
+            Console.WriteLine("-T    => number of turns");
+
+            Console.WriteLine("\nExtras:");
+            Console.WriteLine("-v    => view live simulation");
+            Console.WriteLine("-o    => save simulation data in a .tsv file");
+            Console.WriteLine("\nInput Example:");
+            Console.WriteLine("(-N 50 -M 50 -L 2 -Tinf 5 -T 100 -v -o)");
+        }
+
+        public void Start(int size, int agents)
+        {
+            Console.WriteLine("\n// SIMULATION BEGINS");
+            Console.WriteLine($"// {size} X {size} Test area");
+            Console.WriteLine($"// {agents} Healthy agents\n");
+        }
+
+        public void ShowStats(int currentTurn, int countHealthy, 
+                              int countInfected, int countDead)
+        {
+            string t = String.Format("{0,-4}",currentTurn);
+            string h = String.Format("{0,4}",countHealthy);
+            string i = String.Format("{0,4}",countInfected);
+            string d = String.Format("{0,4}",countDead);
+            
+            Console.WriteLine("// TURN " + t + " >> " + h + " Healthy | " + i +
+                              " Infected | " + d + " Dead");
         }
     }
 }
