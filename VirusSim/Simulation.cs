@@ -11,6 +11,7 @@ namespace VirusSim
         private Grid grid;
         private Agent[] allAgents;
         private Random rand;
+        private Agent ag;
         
         public Simulation(Variables v)
         {
@@ -56,7 +57,10 @@ namespace VirusSim
                 // one of the healthy agents is randomly infected.
                 if (currentTurn == v.TInfect)
                 {
-                    
+                    int aux = rand.Next(1, v.Agents);
+
+                    ag.SpreadInfection(aux, allAgents);
+
                 }
 
                 // Move every agent that is alive
