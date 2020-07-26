@@ -14,12 +14,22 @@ namespace VirusSim
         
         public Simulation(Variables v)
         {
-            this.v    = v;
-            ui        = new UserInterface();
-            grid      = new Grid((int)v.Size, (int)v.Size);
-            allAgents = new Agent[v.Agents];
-            rand      = new Random();
+            // Copies all variable values.
+            this.v = v;
 
+            // Instantiates the UI.
+            ui = new UserInterface();
+
+            // Creates a grid with the user given size (N x N).
+            grid = new Grid((int)v.Size, (int)v.Size);
+
+            // Creates an array with the size of the agents (M).
+            allAgents = new Agent[v.Agents];
+
+            // Instantiates the random number generator.
+            rand = new Random();
+
+            // Creates the agents.
             for (int i = 1; i <= v.Agents; i++)
             {
                 CreateAgent((int)i);
@@ -28,85 +38,94 @@ namespace VirusSim
 
         public void Start()
         {
-            // DEBUG BLOCK
-            int countAlive    = v.Agents;
-            int countHealthy  = v.Agents;
-            int countInfected = 0;
-            int countDead     = 0;
-            foreach (Agent agent in allAgents)
-            {
-                Console.WriteLine($"{agent}");
-            }
+            ////////////////////////////////////////////////////////////////////
+            int countAlive    = v.Agents;///////////////////////////////////////
+            int countHealthy  = v.Agents;///////////////////////////////////////
+            int countInfected = 0;//////////////////////////////////////////////
+            int countDead     = 0;//////////////////////////////////////////////
+            foreach (Agent agent in allAgents)//////////////////////////////////
+            {///////////////////////////////////////////////////////////////////
+                Console.WriteLine($"{agent}");//////////////////////////////////
+            }///////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////
 
-            // Current simulation turn
+            // Current simulation turn.
             int currentTurn = 1;
 
-            // Randomly decides who will be the first agent infected
+            // Randomly decides which agent will be infected first.
             int randomAgentID = rand.Next(1, v.Agents);
-            // DEBUG
-            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");
 
-            // Where all the simulation data is queued to be exported in the end
+            ////////////////////////////////////////////////////////////////////
+            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");//////////
+            ////////////////////////////////////////////////////////////////////
+
+            // All the simulation data is queued to be exported in the end.
             Queue<string> data = new Queue<string>();
 
-            // First message, presents number of agents
+            // First message, presents number of agents.
             ui.Start((int)v.Size, (int)v.Agents);
 
             // Game Loop, ends when the user's set number of turns is reached
             // or if all the simulation agents die.
             while (currentTurn <= v.Turns && countAlive > 0)
             {
+                // Cycles through all the agents.
                 foreach (Agent agent in allAgents)
                 {
                     // If the current turn equals to the user's set infection 
                     // turn, one of the healthy agents is randomly infected.
                     if (currentTurn == v.TInfect)
                     {
+                        // Checks if the current agent is the one who was 
+                        // randomly picked to be infected earlier.
                         if (randomAgentID == agent.ID) 
                         {
+                            // Changes the agent state to infected.
                             agent.Infect();
                             
-                            // DEBUG
-                            Console.WriteLine($"\n(D) Someone in the group is infected:");
-                            foreach (Agent ag in allAgents)
-                            {
-                                Console.WriteLine($"{ag}");
-                            }
-                            Console.WriteLine();
+                            ////////////////////////////////////////////////////
+                            Console.WriteLine($"\n(D) Someone is infected:");///
+                            foreach (Agent ag in allAgents)/////////////////////
+                            {///////////////////////////////////////////////////
+                                Console.WriteLine($"{ag}");/////////////////////
+                            }///////////////////////////////////////////////////
+                            Console.WriteLine();////////////////////////////////
+                            ////////////////////////////////////////////////////
                         }
                     }
                 }
 
 
-                // Move every agent that is alive
+                // Moves every agent that is alive.
 
 
                 // In each grid position, if one agent is infected, all other
-                // agents in this position also become infected
+                // agents in this position also become infected.
 
 
-                // Count Healthy, Infected and Dead agents
-                // If v.Save == True, info is saved to be exported
+                // Count Healthy, Infected and Dead agents.
 
+                ////////////////////////////////////////////////////////////////
+                countHealthy  = countHealthy - 2;///////////////////////////////
+                countInfected = countInfected + 2;//////////////////////////////
+                countDead     = countDead + 1;//////////////////////////////////
+                countAlive    = countAlive - 1;/////////////////////////////////
+                ////////////////////////////////////////////////////////////////
 
-
-                countHealthy  = countHealthy - 2;  ///////////////
-                countInfected = countInfected + 2; //  TESTING  //
-                countDead     = countDead + 1;     // VARIABLES //
-                countAlive    = countAlive - 1;    ///////////////
-
+                // If v.Save == True, info is saved to be exported.
                 if (v.Save)
                 {
                     // Queue organized data from current turn in a line
                     data.Enqueue(DataLine(countHealthy, countInfected, 
-                                          countDead));
+                        countDead));
                 }
 
 
-                // Show current turn stats
-                // If v.View == True, update display
+                // Shows current turn stats
                 ui.ShowStats(currentTurn, countHealthy, countInfected,
-                             countDead);
+                    countDead);
+
+                // If v.View == True, update display
 
                 // Increase current turn value by one
                 currentTurn++;
@@ -117,8 +136,12 @@ namespace VirusSim
             {
                 // Output file for saved data
                 string dataFile = "simulationData.tsv";
+
+                // Info is written in the file.
                 File.WriteAllLines(dataFile, data);
-                Console.WriteLine("\n// File Exported");
+
+                // Confirmation message.
+                Console.WriteLine("\n<simulationData.tsv> data file exported");
             }
         }
 
@@ -127,21 +150,23 @@ namespace VirusSim
             Coords pos;
             Agent agent;
 
+            // Gives it a random position within the grid limits.
             pos   = new Coords(rand.Next((int)v.Size), rand.Next((int)v.Size));
 
+            // Passes an ID, the random position and grid reference.
             agent = new Agent(id, pos, grid);
 
+            // Add agent to the allAgents array.
+            // ([id-1] because allAgents = [0,19] while IDs = [1,20])
             allAgents[id-1] = agent;
         }
 
-        // Separates and returns each turn's data with tabs
         private string DataLine(int countHealthy, int countInfected, 
-                                int countDead)
+            int countDead)
         {
-            string data;
-
-            data = $"{countHealthy}" + "\t" + $"{countInfected}" + "\t" + 
-                   $"{countDead}";
+            // Separates all data with tabs.
+            string data = $"{countHealthy}" + "\t" + $"{countInfected}" + "\t" +
+                $"{countDead}";
 
             return data;
         }

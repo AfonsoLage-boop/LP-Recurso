@@ -7,6 +7,7 @@ namespace VirusSim
 
         public Coords(int x, int y)
         {
+            // Saves the receiving coordinates.
             X = x;
             Y = y;
         }

@@ -32,7 +32,7 @@ namespace VirusSim
         public void ShowStats(int turn, int healthy, int infected, int dead)
         {
             Console.WriteLine($"Turn {turn,-3} || {healthy,3} Healthy | " + 
-            $"{infected,3} Infected | {dead,3} Dead ||");
+                $"{infected,3} Infected | {dead,3} Dead ||");
         }
     }
 }
