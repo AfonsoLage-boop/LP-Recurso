@@ -18,18 +18,9 @@ namespace VirusSim
             grid.PlaceAgent(this);
         }
 
-        public void SpreadInfection(int aux,Agent[] allAgents)
+        public void Infect()
         {
-
-            foreach (Agent agent in allAgents)
-            {
-                if (agent.ID == aux)
-                {
-                    agent.State = State.Infected;
-                }
-
-            }
-
+            State = State.Infected;
         }
         
         public override string ToString()

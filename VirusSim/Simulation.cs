@@ -11,14 +11,12 @@ namespace VirusSim
         private Grid grid;
         private Agent[] allAgents;
         private Random rand;
-        private Agent ag;
         
         public Simulation(Variables v)
         {
             this.v    = v;
             ui        = new UserInterface();
             grid      = new Grid((int)v.Size, (int)v.Size);
-            
             allAgents = new Agent[v.Agents];
             rand      = new Random();
 
@@ -43,6 +41,11 @@ namespace VirusSim
             // Current simulation turn
             int currentTurn = 1;
 
+            // Randomly decides who will be the first agent infected
+            int randomAgentID = rand.Next(1, v.Agents);
+            // DEBUG
+            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");
+
             // Where all the simulation data is queued to be exported in the end
             Queue<string> data = new Queue<string>();
 
@@ -53,15 +56,27 @@ namespace VirusSim
             // or if all the simulation agents die.
             while (currentTurn <= v.Turns && countAlive > 0)
             {
-                // If the current turn equals to the user's set infection turn,
-                // one of the healthy agents is randomly infected.
-                if (currentTurn == v.TInfect)
+                foreach (Agent agent in allAgents)
                 {
-                    int aux = rand.Next(1, v.Agents);
-
-                    ag.SpreadInfection(aux, allAgents);
-
+                    // If the current turn equals to the user's set infection 
+                    // turn, one of the healthy agents is randomly infected.
+                    if (currentTurn == v.TInfect)
+                    {
+                        if (randomAgentID == agent.ID) 
+                        {
+                            agent.Infect();
+                            
+                            // DEBUG
+                            Console.WriteLine($"\n(D) Someone in the group is infected:");
+                            foreach (Agent ag in allAgents)
+                            {
+                                Console.WriteLine($"{ag}");
+                            }
+                            Console.WriteLine();
+                        }
+                    }
                 }
+
 
                 // Move every agent that is alive
 
