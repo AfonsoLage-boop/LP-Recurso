@@ -1,66 +1,25 @@
-using System;
-
-
 namespace VirusSim
 {
     public class Agent
     {
-        public int ID {get ; }
+        public  int    ID    {get;}
+        public  Coords Pos   {get ; private set;}
+        public  State  State {get; private set;}
+        private Grid   grid;
 
-        public Coords Pos { get ; private set; }
-
-        public State Status {get; private set; }
-
-        private Variables v; 
-
-        private Grid grid;
-
-        public Agent(Variables v, Coords pos, State Status)
+        public Agent(int id, Coords pos, Grid grid)
         {
-            this.v = v;
-            //ID = id;
-            Pos = pos;
+            ID        = id;
+            Pos       = pos;
+            State     = State.Healthy;
+            this.grid = grid;
+
+            grid.PlaceAgent(Agent Agent);
         }
-
-        public void CreateAgents ()
-        {
-
-            for (int i = 0; i < v.Agents; i++)
-            {
-                
-                Status = State.Healthy;
-                
-                grid.PlaceAgent(this);
-
-                Console.WriteLine($"Here is pos{Pos}");
-
-                switch (Status)
-                {
-                    case State.Healthy:
-                        
-                        Console.WriteLine("Healthy Guy");
-                        break;
-                    case State.Infected:
-
-                        Console.WriteLine("Corona Guy");
-                        break;
-
-                }
-                
-            } 
-            
-        }
-
 
         private void infected()
         {
 
-            Status = State.Infected;
-
         }
-
-
     }
-
-
 }

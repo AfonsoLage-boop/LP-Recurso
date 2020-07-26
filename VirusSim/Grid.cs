@@ -4,19 +4,19 @@ namespace VirusSim
 {
     public class Grid
     {
-        private State[,] state;
-        private Variables v;
+        private Agent[,] grid;
 
-        public Grid(Variables v)
+        public Grid(int x, int y)
         {
-            this.v = v;
-            state = new State[v.Size, v.Size];
+            grid = new Agent[x, y];
+            
+            Console.WriteLine($"\n(D) Grid created: {x}, {y}"); //DEBUG LINE
         }
 
 
         public void PlaceAgent(Agent agent)
         {
-            state[agent.Pos.X, agent.Pos.Y] = State.Healthy;
+            grid[agent.Pos.X, agent.Pos.Y] = agent;
 
         }
 
