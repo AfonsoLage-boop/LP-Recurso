@@ -1,5 +1,6 @@
 using System;
 
+
 namespace VirusSim
 {
     public class Agent
@@ -19,34 +20,40 @@ namespace VirusSim
             this.v = v;
         }
 
-
-
-        public void Agents ()
+        public void CreateAgents ()
         {
-            
+
             for (int i = 0; i < v.Agents; i++)
             {
                 
-                Console.WriteLine("Banana");
+                Status = State.Healthy;
                 
-                
-                /*switch (Status)
+                switch (Status)
                 {
                     case State.Healthy:
                         
-                        Console.WriteLine("Yep está curado");
+                        Console.WriteLine("Healthy Guy");
                         break;
                     case State.Infected:
 
-                        Console.WriteLine("This isn't suppost to appear");
+                        Console.WriteLine("Zombie Guy");
                         break;
-                    default:
-                        break;
-                }*/
+
+                }
+                
             } 
             
+        }
+
+
+        private void infected()
+        {
+
+            Status = State.Infected;
 
         }
+
+
     }
 
 

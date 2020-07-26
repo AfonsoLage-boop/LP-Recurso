@@ -29,7 +29,7 @@ namespace VirusSim
             Console.WriteLine($"Turns          = {v.Turns}");
             Console.WriteLine($"View           = {v.View}");
             Console.WriteLine($"Save           = {v.Save}\n\n");
-            agent.Agents();
+            agent.CreateAgents();
             // Debug variable. agentsAlive will have to be a list of some sort
             int agentsAlive = v.Agents;
             
