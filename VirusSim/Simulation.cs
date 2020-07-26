@@ -32,7 +32,6 @@ namespace VirusSim
            
             Agent agent;
 
-            // Escolher um local aleatório desocupado para colocar o agente
             do
             {
                 pos = new Coords(
@@ -42,10 +41,9 @@ namespace VirusSim
                 
             } while (world.IsOccupied(pos));
 
-            // Instanciar novo agente
+  
             agent = new Agent(id, pos, status);
 
-            // Guardar agente no array de agentes
             agents[id] = agent;
         }
 
