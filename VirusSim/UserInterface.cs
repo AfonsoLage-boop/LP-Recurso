@@ -22,9 +22,6 @@ namespace VirusSim
             Console.WriteLine("-v    => ativar visualizacao em consola");
             Console.WriteLine("-o    => gravar estatisticas num ficheiro, " + 
             "indicando o mesmo a frente");
-            
         }
-
-
     }
 }

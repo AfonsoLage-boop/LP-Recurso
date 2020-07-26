@@ -7,13 +7,8 @@ namespace VirusSim
         private Grid grid;
         private UserInterface ui;
         private Variables v;
-
-        private Agent agent;
-
         private Random random;
-
         private State status;
-
         private Agent[] agents;
         
         public Simulation(Variables v)
@@ -23,30 +18,6 @@ namespace VirusSim
             ui   = new UserInterface();
             //agent = new Agent(v);
         }
-
-
-        private void NewAgent(State status, int id)
-        {
-            
-            Coords pos;
-           
-            Agent agent;
-
-            do
-            {
-                pos = new Coords(
-                    random.Next((int)v.Size),
-                    random.Next((int)v.Size));
-                
-                
-            } while (world.IsOccupied(pos));
-
-  
-            agent = new Agent(id, pos, status);
-
-            agents[id] = agent;
-        }
-
 
         public void Start()
         {
@@ -59,7 +30,7 @@ namespace VirusSim
             Console.WriteLine($"Turns          = {v.Turns}");
             Console.WriteLine($"View           = {v.View}");
             Console.WriteLine($"Save           = {v.Save}\n\n");
-            //agent.CreateAgents();
+
             // Debug variable. agentsAlive will have to be a list of some sort
             int agentsAlive = v.Agents;
             
@@ -100,5 +71,28 @@ namespace VirusSim
                 currentTurn++;
             }
         }
+
+        private void NewAgent(State status, int id)
+        {
+            
+            Coords pos;
+           
+            Agent agent;
+
+            do
+            {
+                pos = new Coords(
+                    random.Next((int)v.Size),
+                    random.Next((int)v.Size));
+                
+                
+            } while (world.IsOccupied(pos));
+
+  
+            agent = new Agent(id, pos, status);
+
+            agents[id] = agent;
+        }
+
     }
 }
