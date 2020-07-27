@@ -28,6 +28,21 @@ namespace VirusSim
             grid.PlaceAgent(this);
         }
 
+        public void Contaminate(Agent[] allAgents)
+        {
+            foreach (Agent victim in allAgents)
+            {
+                if (ID == victim.ID) continue;
+                
+                else if (Pos.X == victim.Pos.X && Pos.Y == victim.Pos.Y &&
+                    victim.State != State.Dead)
+                {
+                    victim.State = State.Infected;
+                    grid.PlaceAgent(victim);
+                }
+            }
+        }
+
         public void Die()
         {
             // Updates Agent to Dead State.

@@ -60,23 +60,19 @@ namespace VirusSim
                 // Cycles through all the agents.
                 foreach (Agent agent in allAgents)
                 {
-                    // Removes 1HP from every infected agent.
+                    // Removes 1HP if agent is Infected.
                     if (agent.State == State.Infected) agent.HP -= 1; 
 
                     // Kills all agents with 0 HP remaining.
                     if (agent.HP == 0) agent.Die();
 
-                    // If the current turn equals to the user's set infection 
-                    // turn, one of the healthy agents is randomly infected.
-                    if (currentTurn == v.TInfect)
+                    // If its the infection turn and the agent is the randomly
+                    // selected one earlier to be infected.
+                    if (currentTurn == v.TInfect && randomAgentID == agent.ID)
                     {
-                        // Checks if the current agent is the one who was 
-                        // randomly picked to be infected earlier.
-                        if (randomAgentID == agent.ID) 
-                        {
-                            // Updates the agent state to infected.
-                            agent.Infect();
-                        }
+                        // Updates the agent state to infected.
+                        agent.Infect();
+                        
                     }
 
                     // Moves every agent that is alive in a random direction.
@@ -87,11 +83,12 @@ namespace VirusSim
                         agent.Move(random);
                     }
 
-                    // In each grid position, if one agent is infected, all 
-                    // other agents in this position also become infected.
-
-
-                    
+                    // If one agent is infected, all other agents in his 
+                    // position also become infected.
+                    if (agent.State == State.Infected)
+                    {
+                        agent.Contaminate(allAgents);
+                    }
                 }
 
                 // Count Healthy, Infected and Dead agents.
@@ -115,11 +112,11 @@ namespace VirusSim
                     ui.Clear();
 
 ////////////////////////////////////////////////////////////////////////////////
-                    foreach (Agent agent in allAgents)
-                    {
-                        Console.WriteLine($"{agent}");
-                    }
-                    Console.WriteLine("");
+                    // foreach (Agent agent in allAgents)
+                    // {
+                    //     Console.WriteLine($"{agent}");
+                    // }
+                    // Console.WriteLine("");
 ////////////////////////////////////////////////////////////////////////////////
 
                     // Shows line stats.
