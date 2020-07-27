@@ -46,30 +46,31 @@ namespace VirusSim
         public void Start()
         {
 
-            foreach (Agent agent in allAgents)//////////////////////////////////
-            {///////////////////////////////////////////////////////////////////
-                Console.WriteLine($"{agent}");//////////////////////////////////
-            }///////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+            foreach (Agent agent in allAgents)
+            {
+                Console.WriteLine($"{agent}");
+            }
+////////////////////////////////////////////////////////////////////////////////
 
             // Current simulation turn.
             int currentTurn = 1;
 
             //Alive agents counter.
-            int countAlive = 1;
+            int countAlive = v.Agents;
 
             // Randomly decides which agent will be infected first.
             int randomAgentID = rand.Next(1, v.Agents);
 
-            ////////////////////////////////////////////////////////////////////
-            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");//////////
-            ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");
+////////////////////////////////////////////////////////////////////////////////
 
             // All the simulation data is queued to be exported in the end.
             Queue<string> data = new Queue<string>();
 
             // First message, presents number of agents.
-            ui.Start((int)v.Size, (int)v.Agents);
+            ui.StartMsg((int)v.Size, (int)v.Agents);
 
             // Game Loop, ends when the user's set number of turns is reached
             // or if all the simulation agents die.
@@ -89,14 +90,14 @@ namespace VirusSim
                             // Changes the agent state to infected.
                             agent.Infect();
                             
-                            ////////////////////////////////////////////////////
-                            Console.WriteLine($"\n(D) Someone is infected:");///
-                            foreach (Agent ag in allAgents)/////////////////////
-                            {///////////////////////////////////////////////////
-                                Console.WriteLine($"{ag}");/////////////////////
-                            }///////////////////////////////////////////////////
-                            Console.WriteLine();////////////////////////////////
-                            ////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+                            Console.WriteLine($"\n(D) Someone is infected:");
+                            foreach (Agent ag in allAgents)
+                            {
+                                Console.WriteLine($"{ag}");
+                            }
+                            Console.WriteLine();
+////////////////////////////////////////////////////////////////////////////////
                         }
                     }
                 }
@@ -115,7 +116,6 @@ namespace VirusSim
                 //Count alive agents.
                 countAlive = healthyAgents + infectedAgents;
 
-
                 // If v.Save == True, info is saved to be exported.
                 if (v.Save)
                 {
@@ -124,12 +124,12 @@ namespace VirusSim
                         deadAgents));
                 }
 
-
                 // Shows current turn stats
                 ui.ShowStats(currentTurn, healthyAgents, infectedAgents,
                     deadAgents);
 
                 // If v.View == True, update display
+                ui.RenderGrid(grid);
 
                 // Increase current turn value by one
                 currentTurn++;
