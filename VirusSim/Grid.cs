@@ -4,22 +4,25 @@ namespace VirusSim
 {
     public class Grid
     {
+        public int Max {get; private set;}
         private State[,] grid;
+        
 
-        public Grid(int xMax, int yMax)
+        public Grid(int max)
         {
-            grid = new State[xMax, yMax];
+            Max = max;
+            grid = new State[Max, Max];
 
-            for (int i = 0; i < xMax; i++)
+            for (int i = 0; i < Max; i++)
             {
-                for (int j = 0; j < yMax; j++)
+                for (int j = 0; j < Max; j++)
                 {
                     grid[i, j] = State.Null;
                 }
             }
 
 ////////////////////////////////////////////////////////////////////////////////
-            Console.WriteLine($"\n(D) Grid created: {xMax}, {yMax}");
+            // Console.WriteLine($"\n(D) Grid created: {max}, {max}");
 ////////////////////////////////////////////////////////////////////////////////
         }
 
@@ -28,5 +31,9 @@ namespace VirusSim
             grid[agent.Pos.X, agent.Pos.Y] = agent.State;
         }
 
+        public State GetState(int x, int y)
+        {
+            return grid[x, y];
+        }
     }
 }

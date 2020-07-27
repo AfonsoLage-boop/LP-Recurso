@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace VirusSim
 {
@@ -15,7 +16,6 @@ namespace VirusSim
         private Coords pos;
         private Agent ag;
         
-        
         public Simulation(Variables v)
         {
             // Copies all variable values.
@@ -25,7 +25,7 @@ namespace VirusSim
             ui = new UserInterface();
 
             // Creates a grid with the user given size (N x N).
-            grid = new Grid((int)v.Size, (int)v.Size);
+            grid = new Grid((int)v.Size);
 
             // Creates an array with the size of the agents (M).
             allAgents = new Agent[v.Agents];
@@ -47,10 +47,10 @@ namespace VirusSim
         {
 
 ////////////////////////////////////////////////////////////////////////////////
-            foreach (Agent agent in allAgents)
-            {
-                Console.WriteLine($"{agent}");
-            }
+            // foreach (Agent agent in allAgents)
+            // {
+            //     Console.WriteLine($"{agent}");
+            // }
 ////////////////////////////////////////////////////////////////////////////////
 
             // Current simulation turn.
@@ -63,7 +63,7 @@ namespace VirusSim
             int randomAgentID = rand.Next(1, v.Agents);
 
 ////////////////////////////////////////////////////////////////////////////////
-            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");
+            // Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");
 ////////////////////////////////////////////////////////////////////////////////
 
             // All the simulation data is queued to be exported in the end.
@@ -91,12 +91,12 @@ namespace VirusSim
                             agent.Infect();
                             
 ////////////////////////////////////////////////////////////////////////////////
-                            Console.WriteLine($"\n(D) Someone is infected:");
-                            foreach (Agent ag in allAgents)
-                            {
-                                Console.WriteLine($"{ag}");
-                            }
-                            Console.WriteLine();
+                            // Console.WriteLine($"\n(D) Someone is infected:");
+                            // foreach (Agent ag in allAgents)
+                            // {
+                            //     Console.WriteLine($"{ag}");
+                            // }
+                            // Console.WriteLine();
 ////////////////////////////////////////////////////////////////////////////////
                         }
                     }
@@ -124,12 +124,25 @@ namespace VirusSim
                         deadAgents));
                 }
 
-                // Shows current turn stats
-                ui.ShowStats(currentTurn, healthyAgents, infectedAgents,
-                    deadAgents);
+                // If v.View == True, updates display
+                if (v.View)
+                {
+                    // Waits a second.
+                    System.Threading.Thread.Sleep(1000);
 
-                // If v.View == True, update display
-                ui.RenderGrid(grid);
+                    // Improvised console clear for Git Bash
+                    ui.Clear();
+
+                    // Shows line stats
+                    ui.ShowStats(currentTurn, healthyAgents, infectedAgents,
+                        deadAgents);
+                    
+                    // Renders the grid
+                    ui.RenderGrid(grid);
+                }
+                // Shows only line stats.
+                else ui.ShowStats(currentTurn, healthyAgents, infectedAgents,
+                    deadAgents);
 
                 // Increase current turn value by one
                 currentTurn++;
