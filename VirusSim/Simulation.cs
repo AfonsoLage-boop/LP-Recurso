@@ -12,6 +12,7 @@ namespace VirusSim
         private Agent[] allAgents;
         private Random rand;
         
+        
         public Simulation(Variables v)
         {
             // Copies all variable values.
@@ -38,11 +39,7 @@ namespace VirusSim
 
         public void Start()
         {
-            ////////////////////////////////////////////////////////////////////
-            int countAlive    = v.Agents;///////////////////////////////////////
-            int countHealthy  = v.Agents;///////////////////////////////////////
-            int countInfected = 0;//////////////////////////////////////////////
-            int countDead     = 0;//////////////////////////////////////////////
+
             foreach (Agent agent in allAgents)//////////////////////////////////
             {///////////////////////////////////////////////////////////////////
                 Console.WriteLine($"{agent}");//////////////////////////////////
@@ -51,6 +48,9 @@ namespace VirusSim
 
             // Current simulation turn.
             int currentTurn = 1;
+
+            //Alive agents counter.
+            int countAlive = 1;
 
             // Randomly decides which agent will be infected first.
             int randomAgentID = rand.Next(1, v.Agents);
@@ -106,19 +106,16 @@ namespace VirusSim
                 // Count Healthy, Infected and Dead agents.
                 CountAgents(out int healthyAgents, out int infectedAgents, 
                 out int deadAgents);
-                ////////////////////////////////////////////////////////////////
-                countHealthy  = countHealthy - 2;///////////////////////////////
-                countInfected = countInfected + 2;//////////////////////////////
-                countDead     = countDead + 1;//////////////////////////////////
-                countAlive    = countAlive - 1;/////////////////////////////////
-                ////////////////////////////////////////////////////////////////
+                //Count alive agents.
+                countAlive = healthyAgents + infectedAgents;
+
 
                 // If v.Save == True, info is saved to be exported.
                 if (v.Save)
                 {
                     // Queue organized data from current turn in a line
-                    data.Enqueue(DataLine(countHealthy, countInfected, 
-                        countDead));
+                    data.Enqueue(DataLine(healthyAgents, infectedAgents, 
+                        deadAgents));
                 }
 
 
