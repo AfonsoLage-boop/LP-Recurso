@@ -141,14 +141,11 @@ namespace VirusSim
             // If v.Save == True, export all data to a TSV file
             if (v.Save)
             {
-                // Output file for saved data
-                string dataFile = "simulationData.tsv";
-
                 // Info is written in the file.
-                File.WriteAllLines(dataFile, data);
+                File.WriteAllLines(v.File, data);
 
                 // Confirmation message.
-                Console.WriteLine("\n<simulationData.tsv> data file exported");
+                Console.WriteLine($"\n// {v.File} exported.");
             }
         }
 
