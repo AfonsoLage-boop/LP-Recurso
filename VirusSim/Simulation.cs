@@ -11,6 +11,9 @@ namespace VirusSim
         private Grid grid;
         private Agent[] allAgents;
         private Random rand;
+        private Direction dir;
+        private Coords pos;
+        private Agent ag;
         
         
         public Simulation(Variables v)
@@ -29,6 +32,9 @@ namespace VirusSim
 
             // Instantiates the random number generator.
             rand = new Random();
+
+            // Instantiates the directions.
+            dir = new Direction();
 
             // Creates the agents.
             for (int i = 1; i <= v.Agents; i++)
@@ -97,7 +103,7 @@ namespace VirusSim
 
 
                 // Moves every agent that is alive.
-
+                ag.AgentWalk(pos, dir);
 
                 // In each grid position, if one agent is infected, all other
                 // agents in this position also become infected.
