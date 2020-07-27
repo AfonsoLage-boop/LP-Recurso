@@ -4,7 +4,7 @@ namespace VirusSim
 {
     public class UserInterface
     {
-        public void InsufArgs()
+        public void InsufArgsMsg()
         {
             Console.WriteLine("\n!! ERROR !!");
             Console.WriteLine("Insufficient arguments passed in command line.");
@@ -22,7 +22,7 @@ namespace VirusSim
             Console.WriteLine("(-N 50 -M 50 -L 2 -Tinf 5 -T 100 -v -o)");
         }
 
-        public void Start(int size, int agents)
+        public void StartMsg(int size, int agents)
         {
             Console.WriteLine("\nSIMULATION BEGINS");
             Console.WriteLine($"{size} X {size} Test area");
@@ -31,8 +31,13 @@ namespace VirusSim
 
         public void ShowStats(int turn, int healthy, int infected, int dead)
         {
-            Console.WriteLine($"Turn {turn,-3} || {healthy,3} Healthy | " + 
-                $"{infected,3} Infected | {dead,3} Dead ||");
+            Console.WriteLine($"Turn {turn,-3} || {healthy,3} healthy | " + 
+                $"{infected,3} infected | {dead,3} dead ||");
+        }
+
+        public void RenderGrid(Grid grid)
+        {
+            // for (int i = 0; i < 
         }
     }
 }
