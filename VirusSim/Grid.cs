@@ -4,20 +4,28 @@ namespace VirusSim
 {
     public class Grid
     {
-        private Agent[,] grid;
+        private State[,] grid;
 
-        public Grid(int x, int y)
+        public Grid(int xMax, int yMax)
         {
-            grid = new Agent[x, y];
-            
-            Console.WriteLine($"\n(D) Grid created: {x}, {y}"); //DEBUG LINE
-        }
+            grid = new State[xMax, yMax];
 
+            for (int i = 0; i < xMax; i++)
+            {
+                for (int j = 0; j < yMax; j++)
+                {
+                    grid[i, j] = State.Null;
+                }
+            }
+
+////////////////////////////////////////////////////////////////////////////////
+            Console.WriteLine($"\n(D) Grid created: {xMax}, {yMax}");
+////////////////////////////////////////////////////////////////////////////////
+        }
 
         public void PlaceAgent(Agent agent)
         {
-            grid[agent.Pos.X, agent.Pos.Y] = agent;
-
+            grid[agent.Pos.X, agent.Pos.Y] = agent.State;
         }
 
     }
