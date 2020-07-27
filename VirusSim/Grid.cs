@@ -20,14 +20,16 @@ namespace VirusSim
                     grid[i, j] = State.Null;
                 }
             }
-
-////////////////////////////////////////////////////////////////////////////////
-            // Console.WriteLine($"\n(D) Grid created: {max}, {max}");
-////////////////////////////////////////////////////////////////////////////////
         }
 
         public void PlaceAgent(Agent agent)
         {
+            grid[agent.Pos.X, agent.Pos.Y] = agent.State;
+        }
+
+        public void MoveAgent(int oldX, int oldY, Agent agent)
+        {
+            grid[oldX, oldY] = State.Null;
             grid[agent.Pos.X, agent.Pos.Y] = agent.State;
         }
 
