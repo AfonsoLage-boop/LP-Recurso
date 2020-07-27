@@ -22,7 +22,7 @@ namespace VirusSim
             // gone wrong.
             else 
             {
-                ui.InsufArgs();
+                ui.InsufArgsMsg();
             }
         }
     }
