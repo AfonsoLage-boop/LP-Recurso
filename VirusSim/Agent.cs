@@ -30,8 +30,8 @@ namespace VirusSim
             // Saves the initial of each State.
             string s = "";
             if (State == State.Healthy) s = "H";
-            if (State == State.Infected) s = "I";
-            if (State == State.Dead) s = "D";
+            else if (State == State.Infected) s = "I";
+            else if (State == State.Dead) s = "D";
 
             return $"(D) {s}{ID,-3}{Pos}";
         }

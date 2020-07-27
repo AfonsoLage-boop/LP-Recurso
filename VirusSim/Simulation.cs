@@ -38,16 +38,17 @@ namespace VirusSim
 
         public void Start()
         {
-            ////////////////////////////////////////////////////////////////////
-            int countAlive    = v.Agents;///////////////////////////////////////
-            int countHealthy  = v.Agents;///////////////////////////////////////
-            int countInfected = 0;//////////////////////////////////////////////
-            int countDead     = 0;//////////////////////////////////////////////
-            foreach (Agent agent in allAgents)//////////////////////////////////
-            {///////////////////////////////////////////////////////////////////
-                Console.WriteLine($"{agent}");//////////////////////////////////
-            }///////////////////////////////////////////////////////////////////
-            ////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////
+            int countAlive    = v.Agents;
+            int countHealthy  = v.Agents;
+            int countInfected = 0;
+            int countDead     = 0;
+            foreach (Agent agent in allAgents)
+            {
+                Console.WriteLine($"{agent}");
+            }
+////////////////////////////////////////////////////////////////////////////////
 
             // Current simulation turn.
             int currentTurn = 1;
@@ -55,15 +56,15 @@ namespace VirusSim
             // Randomly decides which agent will be infected first.
             int randomAgentID = rand.Next(1, v.Agents);
 
-            ////////////////////////////////////////////////////////////////////
-            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");//////////
-            ////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+            Console.WriteLine($"(D) RandomAgentID = {randomAgentID}");
+////////////////////////////////////////////////////////////////////////////////
 
             // All the simulation data is queued to be exported in the end.
             Queue<string> data = new Queue<string>();
 
             // First message, presents number of agents.
-            ui.Start((int)v.Size, (int)v.Agents);
+            ui.StartMsg((int)v.Size, (int)v.Agents);
 
             // Game Loop, ends when the user's set number of turns is reached
             // or if all the simulation agents die.
@@ -83,14 +84,14 @@ namespace VirusSim
                             // Changes the agent state to infected.
                             agent.Infect();
                             
-                            ////////////////////////////////////////////////////
-                            Console.WriteLine($"\n(D) Someone is infected:");///
-                            foreach (Agent ag in allAgents)/////////////////////
-                            {///////////////////////////////////////////////////
-                                Console.WriteLine($"{ag}");/////////////////////
-                            }///////////////////////////////////////////////////
-                            Console.WriteLine();////////////////////////////////
-                            ////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+                            Console.WriteLine($"\n(D) Someone is infected:");
+                            foreach (Agent ag in allAgents)
+                            {
+                                Console.WriteLine($"{ag}");
+                            }
+                            Console.WriteLine();
+////////////////////////////////////////////////////////////////////////////////
                         }
                     }
                 }
@@ -105,12 +106,12 @@ namespace VirusSim
 
                 // Count Healthy, Infected and Dead agents.
 
-                ////////////////////////////////////////////////////////////////
-                countHealthy  = countHealthy - 2;///////////////////////////////
-                countInfected = countInfected + 2;//////////////////////////////
-                countDead     = countDead + 1;//////////////////////////////////
-                countAlive    = countAlive - 1;/////////////////////////////////
-                ////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+                countHealthy  = countHealthy - 2;
+                countInfected = countInfected + 2;
+                countDead     = countDead + 1;
+                countAlive    = countAlive - 1;
+////////////////////////////////////////////////////////////////////////////////
 
                 // If v.Save == True, info is saved to be exported.
                 if (v.Save)
@@ -126,6 +127,7 @@ namespace VirusSim
                     countDead);
 
                 // If v.View == True, update display
+                ui.RenderGrid(grid);
 
                 // Increase current turn value by one
                 currentTurn++;
