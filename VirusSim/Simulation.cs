@@ -32,7 +32,7 @@ namespace VirusSim
             // Creates the agents.
             for (int i = 1; i <= v.Agents; i++)
             {
-                CreateAgent((int)i);
+                CreateAgent((int)i, (int)v.AgentsHP);
             }
         }
 
@@ -60,6 +60,12 @@ namespace VirusSim
                 // Cycles through all the agents.
                 foreach (Agent agent in allAgents)
                 {
+                    // Removes 1HP from every infected agent.
+                    if (agent.State == State.Infected) agent.HP -= 1; 
+
+                    // Kills all agents with 0 HP remaining.
+                    if (agent.HP == 0) agent.Die();
+
                     // If the current turn equals to the user's set infection 
                     // turn, one of the healthy agents is randomly infected.
                     if (currentTurn == v.TInfect)
@@ -68,30 +74,25 @@ namespace VirusSim
                         // randomly picked to be infected earlier.
                         if (randomAgentID == agent.ID) 
                         {
-                            // Changes the agent state to infected.
+                            // Updates the agent state to infected.
                             agent.Infect();
-                            
-////////////////////////////////////////////////////////////////////////////////
-                            // Console.WriteLine($"\n(D) Someone is infected:");
-                            // foreach (Agent ag in allAgents)
-                            // {
-                            //     Console.WriteLine($"{ag}");
-                            // }
-                            // Console.WriteLine();
-////////////////////////////////////////////////////////////////////////////////
                         }
                     }
-                    // Moves every agent that is alive.
+
+                    // Moves every agent that is alive in a random direction.
                     if (agent.State == State.Healthy || 
                         agent.State == State.Infected)
                     {
                         int random = rand.Next(7);
                         agent.Move(random);
                     }
-                }
-                // In each grid position, if one agent is infected, all other
-                // agents in this position also become infected.
 
+                    // In each grid position, if one agent is infected, all 
+                    // other agents in this position also become infected.
+
+
+                    
+                }
 
                 // Count Healthy, Infected and Dead agents.
                 CountAgents(out int countHealthy, out int countInfected, 
@@ -100,13 +101,9 @@ namespace VirusSim
                 // Check if all agents are dead.
                 if (countDead == v.Agents) allDead = true;
 
-                // If v.Save == True, info is saved to be exported.
-                if (v.Save)
-                {
-                    // Queue organized data from current turn in a line
-                    data.Enqueue(DataLine(countHealthy, countInfected, 
-                        countDead));
-                }
+                // If v.Save == True, data is queued in a line for later.
+                if (v.Save) data.Enqueue(DataLine(countHealthy, countInfected, 
+                    countDead));
 
                 // If v.View == True, updates display.
                 if (v.View)
@@ -118,11 +115,11 @@ namespace VirusSim
                     ui.Clear();
 
 ////////////////////////////////////////////////////////////////////////////////
-                    // foreach (Agent agent in allAgents)
-                    // {
-                    //     Console.WriteLine($"{agent}");
-                    // }
-                    // Console.WriteLine("");
+                    foreach (Agent agent in allAgents)
+                    {
+                        Console.WriteLine($"{agent}");
+                    }
+                    Console.WriteLine("");
 ////////////////////////////////////////////////////////////////////////////////
 
                     // Shows line stats.
@@ -132,13 +129,14 @@ namespace VirusSim
                     // Renders the grid.
                     ui.RenderGrid(grid);
                 }
+
                 // Only shows line stats.
                 else ui.ShowStats(currentTurn, countHealthy, countInfected,
                     countDead);
 
                 // Increase current turn by one.
                 currentTurn++;
-            }   
+            }
 
             // If v.Save == True, export all data to a TSV file
             if (v.Save)
@@ -154,7 +152,7 @@ namespace VirusSim
             }
         }
 
-        private void CreateAgent(int id)
+        private void CreateAgent(int id, int hp)
         {
             Coords pos;
             Agent agent;
@@ -163,7 +161,7 @@ namespace VirusSim
             pos   = new Coords(rand.Next((int)v.Size), rand.Next((int)v.Size));
 
             // Passes an ID, the random position and grid reference.
-            agent = new Agent(id, pos, grid);
+            agent = new Agent(id, hp, pos, grid);
 
             // Add agent to the allAgents array.
             // ([id-1] because allAgents = [0,19] while IDs = [1,20])

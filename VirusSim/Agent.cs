@@ -3,14 +3,16 @@ namespace VirusSim
     public class Agent
     {
         public  int    ID    {get;}
-        public  Coords Pos   {get ; private set;}
+        public  int    HP    {get; set;}
+        public  Coords Pos   {get; private set;}
         public  State  State {get; private set;}
         private Grid   grid;
 
-        public Agent(int id, Coords pos, Grid grid)
+        public Agent(int id, int hp, Coords pos, Grid grid)
         {
             // Saves all the constructor info in each new agent.
             ID        = id;
+            HP        = hp;
             Pos       = pos;
             State     = State.Healthy;
             this.grid = grid;
@@ -23,6 +25,13 @@ namespace VirusSim
         {
             // Updates Agent to Infected State.
             State = State.Infected;
+            grid.PlaceAgent(this);
+        }
+
+        public void Die()
+        {
+            // Updates Agent to Dead State.
+            State = State.Dead;
             grid.PlaceAgent(this);
         }
 
@@ -122,7 +131,7 @@ namespace VirusSim
             else if (State == State.Infected) s = "I";
             else if (State == State.Dead) s = "D";
 
-            return $"(D) {s}{ID,-3}{Pos}";
+            return $"(D) {s}{ID,-3}:{HP,3}: {Pos}";
         }
     }
 }
