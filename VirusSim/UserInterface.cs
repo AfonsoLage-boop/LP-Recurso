@@ -46,8 +46,8 @@ namespace VirusSim
             string i = $"{yellow}{bold}{infected,3}{reset}";
             string d = $"{red}{bold}{dead,3}{reset}";
 
-            Console.WriteLine($"Turn {t} || {h} healthy | {i} infected | " +
-                $"{d} dead ||");
+            Console.WriteLine($"Turn {t} >> {h} healthy | {i} infected | " +
+                $"{d} dead");
         }
 
         public void RenderGrid(Grid grid)
