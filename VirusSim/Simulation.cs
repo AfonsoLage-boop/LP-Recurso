@@ -104,7 +104,8 @@ namespace VirusSim
 
 
                 // Count Healthy, Infected and Dead agents.
-
+                CountAgents(out int healthyAgents, out int infectedAgents, 
+                out int deadAgents);
                 ////////////////////////////////////////////////////////////////
                 countHealthy  = countHealthy - 2;///////////////////////////////
                 countInfected = countInfected + 2;//////////////////////////////
@@ -122,8 +123,8 @@ namespace VirusSim
 
 
                 // Shows current turn stats
-                ui.ShowStats(currentTurn, countHealthy, countInfected,
-                    countDead);
+                ui.ShowStats(currentTurn, healthyAgents, infectedAgents,
+                    deadAgents);
 
                 // If v.View == True, update display
 
@@ -170,5 +171,30 @@ namespace VirusSim
 
             return data;
         }
+
+        private void CountAgents( out int healthyAgents,out int infectedAgents,
+            out int deadAgents)
+        {
+            healthyAgents = 0;
+            infectedAgents = 0;
+            deadAgents = 0;
+
+            foreach (Agent agent in allAgents)
+            {
+                if (agent.State == State.Healthy)
+                {
+                    healthyAgents++;
+                }
+                else if(agent.State == State.Infected)
+                {
+                    infectedAgents++;
+                }
+                else
+                {
+                    deadAgents++;
+                }
+            }
+        }
+
     }
 }
