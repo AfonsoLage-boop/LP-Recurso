@@ -4,16 +4,17 @@ namespace VirusSim
 {
     public struct Variables
     {
-        public int  Size     {get; private set;}
-        public int  Agents   {get; private set;}
-        public int  AgentsHP {get; private set;}
-        public int  TInfect  {get; private set;}
-        public int  Turns    {get; private set;}
-        public bool View     {get; private set;}
-        public bool Save     {get; private set;}
+        public int    Size     {get; private set;}
+        public int    Agents   {get; private set;}
+        public int    AgentsHP {get; private set;}
+        public int    TInfect  {get; private set;}
+        public int    Turns    {get; private set;}
+        public bool   View     {get; private set;}
+        public bool   Save     {get; private set;}
+        public string File     {get; private set;}
 
         private Variables(int size, int agents, int agentsHP, int tInfect,
-            int turns, bool view, bool save)
+            int turns, bool view, bool save, string file)
         {
             // Saves all variables.
             Size     = size;
@@ -23,6 +24,7 @@ namespace VirusSim
             Turns    = turns;
             View     = view;
             Save     = save;
+            File     = file;
         }
 
         public bool ValidateVars(string[] args)
@@ -43,8 +45,6 @@ namespace VirusSim
                     {
                         // the integer is saved in its corresponding property,
                         Size = aux;
-                        // and we move on to the next.
-                        continue;
                     }
                     // If it doesnt, the cycle breaks, instead of throwing an 
                     // exception.
@@ -58,7 +58,6 @@ namespace VirusSim
                     if (int.TryParse(args[++i], out aux))
                     {
                         Agents = aux;
-                        continue;
                     }
                     else break;
                 }
@@ -69,7 +68,6 @@ namespace VirusSim
                     if (int.TryParse(args[++i], out aux))
                     {
                         AgentsHP = aux;
-                        continue;
                     }
                     else break;
                 }
@@ -80,7 +78,6 @@ namespace VirusSim
                     if (int.TryParse(args[++i], out aux))
                     {
                         TInfect = aux;
-                        continue;
                     }
                     else break;
                 }
@@ -91,22 +88,30 @@ namespace VirusSim
                     if (int.TryParse(args[++i], out aux))
                     {
                         Turns = aux;
-                        continue;
                     }
                     else break;
                 }
 
-                // Because theres no need to convert, here we only check these
-                // properties as true.
+                // Checks View as True..
                 else if (args[i].Equals("-v",
                     StringComparison.InvariantCultureIgnoreCase))
                 {
                     View = true;
                 }
+
+                // Checks Save as True and saves a file name.
                 else if (args[i].Equals("-o",
                     StringComparison.InvariantCultureIgnoreCase))
                 {
+                    // Default file name.
                     Save = true;
+                    File = "simulationData.tsv";
+                }
+                
+                // Overrides default file name with the one given by the user.
+                else if(args[i].Contains(".tsv"))
+                {
+                    File = args[i];
                 }
             }
 
