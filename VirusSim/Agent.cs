@@ -23,6 +23,7 @@ namespace VirusSim
         {
             // Updates Agent to Infected State.
             State = State.Infected;
+            grid.PlaceAgent(this);
         }
         
         public override string ToString()

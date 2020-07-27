@@ -37,7 +37,37 @@ namespace VirusSim
 
         public void RenderGrid(Grid grid)
         {
-            // for (int i = 0; i < 
+            for (int i = 0; i < grid.Max; i++)
+            {
+                for (int j = 0; j < grid.Max; j++)
+                {
+                    switch (grid.GetState(i, j))
+                    {
+                        case State.Null:
+                            Console.Write("[ ]");
+                            break;
+
+                        case State.Healthy:
+                            Console.Write("[H]");
+                            break;
+
+                        case State.Infected:
+                            Console.Write("[I]");
+                            break;
+
+                        case State.Dead:
+                            Console.Write("[D]");
+                            break;
+                    }
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public void Clear()
+        {
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            Console.WriteLine("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         }
     }
 }
