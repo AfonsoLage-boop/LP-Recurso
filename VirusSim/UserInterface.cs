@@ -4,6 +4,16 @@ namespace VirusSim
 {
     public class UserInterface
     {
+        string red      = "\u001b[31m";
+        string redBG    = "\u001b[41m";
+        string green    = "\u001b[32m";
+        string greenBG  = "\u001b[42m";
+        string yellow   = "\u001b[33m";
+        string yellowBG = "\u001b[43m";
+        string whiteBG  = "\u001b[47m";
+        string reset    = "\u001b[0m";
+        string bold     = "\u001b[1m";
+
         public void InsufArgsMsg()
         {
             Console.WriteLine("\n!! ERROR !!");
@@ -31,37 +41,60 @@ namespace VirusSim
 
         public void ShowStats(int turn, int healthy, int infected, int dead)
         {
-            Console.WriteLine($"Turn {turn,-3} || {healthy,3} healthy | " + 
-                $"{infected,3} infected | {dead,3} dead ||");
+            string t = $"{bold}{turn,-3}{reset}";
+            string h = $"{green}{bold}{healthy,3}{reset}";
+            string i = $"{yellow}{bold}{infected,3}{reset}";
+            string d = $"{red}{bold}{dead,3}{reset}";
+
+            Console.WriteLine($"Turn {t} || {h} healthy | {i} infected | " +
+                $"{d} dead ||");
         }
 
         public void RenderGrid(Grid grid)
         {
+            Console.WriteLine("");
+            for (int top = 0; top < grid.Max+2; top++)
+            {
+                Console.Write($"{whiteBG}  {reset}");
+            }
+            Console.WriteLine("");
+
             for (int i = 0; i < grid.Max; i++)
             {
                 for (int j = 0; j < grid.Max; j++)
                 {
+
+                    if (j == 0)
+                    {
+                        Console.Write($"{whiteBG}  {reset}");
+                    }
+
                     switch (grid.GetState(i, j))
                     {
                         case State.Null:
-                            Console.Write("[ ]");
+                            Console.Write($"  ");
                             break;
 
                         case State.Healthy:
-                            Console.Write("[H]");
+                            Console.Write($"{greenBG}  {reset}");
                             break;
 
                         case State.Infected:
-                            Console.Write("[I]");
+                            Console.Write($"{yellowBG}  {reset}");
                             break;
 
                         case State.Dead:
-                            Console.Write("[D]");
+                            Console.Write($"{redBG}  {reset}");
                             break;
                     }
                 }
-                Console.WriteLine();
+                Console.WriteLine($"{whiteBG}  {reset}");
             }
+            for (int bottom = 0; bottom < grid.Max+2; bottom++)
+            {
+                Console.Write($"{whiteBG}  {reset}");
+            }
+            Console.WriteLine("");
         }
 
         public void Clear()

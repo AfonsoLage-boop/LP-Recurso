@@ -10,7 +10,7 @@ namespace VirusSim
 
         public Grid(int max)
         {
-            Max = max + 1;
+            Max = max;
             grid = new State[Max, Max];
 
             for (int i = 0; i < Max; i++)
