@@ -16,20 +16,39 @@ namespace VirusSim
 
         public void InsufArgsMsg()
         {
-            Console.WriteLine("\n!! ERROR !!");
-            Console.WriteLine("Insufficient arguments passed in command line.");
-            Console.WriteLine("\nTo start the simulation I need to know:");
-            Console.WriteLine(" -N    => grid dimensions (N x N);");
-            Console.WriteLine(" -M    => number of agents;");
-            Console.WriteLine(" -L    => agents' health (in turns)");
-            Console.WriteLine(" -Tinf => first infected (turn)");
-            Console.WriteLine(" -T    => number of total turns");
+            Console.WriteLine(
+                $"\n{bold}{red}!! ERROR !!");
+            Console.WriteLine(
+                $"Insufficient arguments passed in command line.{reset}");
+            Console.WriteLine(
+                "\nTo start the simulation I need to know:");
+            Console.WriteLine(
+                $"{yellow} -N{reset}    > grid dimensions (N x N);");
+            Console.WriteLine(
+                $"{yellow} -M{reset}    > number of agents;");
+            Console.WriteLine(
+                $"{yellow} -L{reset}    > agents' health (in turns)");
+            Console.WriteLine(
+                $"{yellow} -Tinf{reset} > first infected (turn)");
+            Console.WriteLine(
+                $"{yellow} -T{reset}    > number of total turns");
 
-            Console.WriteLine("\nExtras:");
-            Console.WriteLine(" -v    => view live simulation");
-            Console.WriteLine(" -o    => save simulation data in a .tsv file");
-            Console.WriteLine("\nInput Example:");
-            Console.WriteLine("(-N 50 -M 50 -L 2 -Tinf 5 -T 100 -v -o)");
+            Console.WriteLine(
+                "\nExtras:");
+            Console.WriteLine(
+                $"{yellow} -v{reset}    > view live simulation");
+            Console.WriteLine(
+                $"{yellow} -o{reset}    > export data to a .tsv file");
+            Console.WriteLine(
+                $"\nInput Examples:\n(after // {green}dotnet run --{reset} )\n");
+            Console.WriteLine(
+                $"{green} -N 25 -M 50 -L 5 -Tinf 5 -T 50");
+            Console.WriteLine(
+                " -M 50 -N 25 -Tinf 5 -T 50 -L 5");
+            Console.WriteLine(
+                " -N 50 -M 50 -L 2 -Tinf 5 -T 50 -v -o");
+            Console.WriteLine(
+                $" -v -N 50 -M 50 -L 2 -Tinf 5 -T 50 -o data.tsv{reset}");
         }
 
         public void StartMsg(int size, int agents)
