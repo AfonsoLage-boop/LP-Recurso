@@ -11,6 +11,7 @@ namespace VirusSim
         string yellow   = "\u001b[33m";
         string yellowBG = "\u001b[43m";
         string whiteBG  = "\u001b[47m";
+        string black    = "\u001b[30m";
         string blackBG  = "\u001b[40m";
         string reset    = "\u001b[0m";
         string bold     = "\u001b[1m";
@@ -71,10 +72,11 @@ namespace VirusSim
             Console.WriteLine($"\n// All {agents} agents died by turn {turn}");
         }
 
-        public void InfectEndMsg(int turn)
+        public void InfectEndMsg(int turn, int healthy)
         {
             Console.WriteLine("\n// Simulation Complete.");
-            Console.WriteLine($"\n// The virus died in turn {turn}.");
+            Console.WriteLine($"\n// The virus died in turn {turn} with " +
+                $"{healthy} agents remaining.");
         }
 
         public void ShowStats(int turn, int healthy, int infected, int dead)
@@ -93,7 +95,7 @@ namespace VirusSim
             Console.WriteLine("");
             for (int top = 0; top < grid.Max+2; top++)
             {
-                Console.Write($"{whiteBG}  {reset}");
+                Console.Write($"{whiteBG}{black}//{reset}");
             }
             Console.WriteLine("");
 
@@ -104,33 +106,33 @@ namespace VirusSim
 
                     if (j == 0)
                     {
-                        Console.Write($"{whiteBG}  {reset}");
+                        Console.Write($"{whiteBG}{black}//{reset}");
                     }
 
                     switch (grid.GetState(i, j))
                     {
                         case State.Null:
-                            Console.Write($"{blackBG}  {reset}");
+                            Console.Write($"{blackBG}{black}[]{reset}");
                             break;
 
                         case State.Healthy:
-                            Console.Write($"{greenBG}  {reset}");
+                            Console.Write($"{greenBG}{black}[]{reset}");
                             break;
 
                         case State.Infected:
-                            Console.Write($"{yellowBG}  {reset}");
+                            Console.Write($"{yellowBG}{black}[]{reset}");
                             break;
 
                         case State.Dead:
-                            Console.Write($"{redBG}  {reset}");
+                            Console.Write($"{redBG}[]{reset}");
                             break;
                     }
                 }
-                Console.WriteLine($"{whiteBG}  {reset}");
+                Console.WriteLine($"{whiteBG}{black}//{reset}");
             }
             for (int bottom = 0; bottom < grid.Max+2; bottom++)
             {
-                Console.Write($"{whiteBG}  {reset}");
+                Console.Write($"{whiteBG}{black}//{reset}");
             }
             Console.WriteLine("");
         }
