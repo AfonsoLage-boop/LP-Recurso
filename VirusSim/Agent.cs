@@ -42,7 +42,7 @@ namespace VirusSim
                 {
                     // Victim becomes infected.
                     victim.State = State.Infected;
-                    
+
                     // Update agent info to grid.
                     grid.PlaceAgent(victim);
                 }
@@ -66,9 +66,9 @@ namespace VirusSim
 
         public void Move(int random, Agent[] allAgents)
         {
-            int oldX      = Pos.X;
-            int oldY      = Pos.Y;
-            bool hasMoved = false;
+            int    oldX      = Pos.X;
+            int    oldY      = Pos.Y;
+            bool   hasMoved  = false;
 
             while(!hasMoved)
             {
@@ -149,7 +149,8 @@ namespace VirusSim
                     else random = 0;
                 }
             }
-            grid.MoveAgent(oldX, oldY, this, allAgents);
+            // Moves agent in grid.
+            grid.Update(oldX, oldY, this, allAgents);
         }
 
         public override string ToString()

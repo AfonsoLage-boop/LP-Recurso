@@ -30,41 +30,41 @@ namespace VirusSim
             grid[agent.Pos.X, agent.Pos.Y] = agent.State;
         }
 
-        public void MoveAgent(int oldX, int oldY, Agent agent, Agent[] allA)
+        public void Update(int oldX, int oldY, Agent agent, Agent[] allA)
         {
+            bool dead     = false;
+            bool infected = false;
+            bool healthy  = false;
+
             // Cycles through all agents.
             foreach (Agent other in allA)
             {
                 // Agent finds himself, ignore.
-                if(other.ID == agent.ID) continue;
+                if (other.ID == agent.ID) continue;
 
                 // Another agent is in this agent's OLD POSITION.
-                else if(other.Pos.X == oldX && other.Pos.Y == oldY)
+                if (other.Pos.X == oldX && other.Pos.Y == oldY &&
+                    other.State != State.Null)
                 {
-                    bool infected = false;
+                    // 1st priority - someone dead is there.
+                    if (other.State == State.Dead) dead = true;
 
-                    // The other agent is infected.
-                    if(other.State == State.Infected) infected = true;
-
-                    // The other agent just died.
-                    else if(other.State == State.Dead) 
-                    {
-                        // 1st priority-  representing that someone died there.
-                        grid[oldX, oldY] = State.Dead;
-                        // No need to check the other agents due to priorities.
-                        break;
-                    }
-
-                    // 2nd priority - someone is infected there.
-                    if (infected) grid[oldX, oldY] = State.Infected;
+                    // 2nd priority - someone infected is there.
+                    if (other.State == State.Infected) infected = true;
                     
-                    // 3rd priority - someone is there.
-                    else grid[oldX, oldY] = other.State;
+                    // 3rd priority - someone healthy is there.
+                    if (other.State == State.Healthy) healthy = true;
                 }
-                // 4th priority - no one is there.
-                else grid[oldX, oldY] = State.Null;
             }
-            // Sets this agent's state in the NEW POSITION.
+
+            // In the end of the cycle, it sets the old position's state, 
+            // according to their priority.
+            if      (dead)     grid[oldX, oldY] = State.Dead;
+            else if (infected) grid[oldX, oldY] = State.Infected;
+            else if (healthy)  grid[oldX, oldY] = State.Healthy;
+            else               grid[oldX, oldY] = State.Null;
+
+            // Sets the new position.
             grid[agent.Pos.X, agent.Pos.Y] = agent.State;
         }
 

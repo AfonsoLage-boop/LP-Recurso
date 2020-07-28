@@ -68,7 +68,11 @@ namespace VirusSim
                     }
 
                     // Removes 1HP if agent is Infected.
-                    if (agent.State == State.Infected) agent.HP -= 1; 
+                    if (agent.State == State.Infected && 
+                        currentTurn !=v.TInfect) 
+                    {
+                        agent.HP -= 1; 
+                    }
 
                     // Remove Dead agents from previous round from grid.
                     if (agent.State == State.Dead) agent.Remove();
