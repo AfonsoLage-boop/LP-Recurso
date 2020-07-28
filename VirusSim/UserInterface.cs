@@ -58,6 +58,24 @@ namespace VirusSim
             Console.WriteLine($"{agents} Healthy agents\n");
         }
 
+        public void MaxTurnsMsg(int turn)
+        {
+            Console.WriteLine("\n// Simulation Complete.");
+            Console.WriteLine($"\n// User turns limit reached. ({turn})");
+        }
+
+        public void AllDeadMsg(int turn, int agents)
+        {
+            Console.WriteLine("\n// Simulation Complete.");
+            Console.WriteLine($"\n// All {agents} agents died by turn {turn}");
+        }
+
+        public void InfectEndMsg(int turn)
+        {
+            Console.WriteLine("\n// Simulation Complete.");
+            Console.WriteLine($"\n// The virus died in turn {turn}.");
+        }
+
         public void ShowStats(int turn, int healthy, int infected, int dead)
         {
             string t = $"{bold}{turn,-3}{reset}";
