@@ -72,20 +72,30 @@ namespace VirusSim
 
                     // Remove Dead agents from previous round from grid.
                     if (agent.State == State.Dead) agent.Remove();
+
+                    // Moves every agent that is alive in a random direction.
+                    if (agent.State == State.Healthy ||
+                        agent.State == State.Infected)
+                    {
+                        int random = rand.Next(7);
+                        agent.Move(random, allAgents);
+                    }
                 }
 
-                // Moves every agent that is alive in a random direction.
-                // First we move the healthy ones, then the infected.
-                // This way, infected squares always stay above healthy ones.
-                MoveAgents(State.Healthy);
-                MoveAgents(State.Infected);
-
-                // If one agent is infected, all other agents in his position
-                // also become infected.
-                SpreadInfection();
-
-                // Kills all agents with 0 HP remaining.
-                KillAgents();
+                ////////////////////////////////////////////////////////////////
+                // Both of these methods are out of the agents loop above so  //
+                // that the states they update (infected and dead) can        //
+                // overlap, respectively, other grid states in the same       //
+                // position, allowing a more accurate grid view.              //
+                                                                              //
+                // If one agent is infected, all healthy ones in his          //
+                // position also become infected.                             //
+                SpreadInfection();                                            //
+                                                                              //
+                // Kills all agents with 0 HP remaining.                      //
+                KillAgents();                                                 //
+                                                                              //
+                ////////////////////////////////////////////////////////////////
 
                 // Count Healthy, Infected and Dead agents.
                 CountAgents(out int cHealthy, out int cInfected, out int cDead);
@@ -143,19 +153,6 @@ namespace VirusSim
             // Add agent to the allAgents array.
             // ([id-1] because allAgents = [0,19] while IDs = [1,20])
             allAgents[id-1] = agent;
-        }
-
-        private void MoveAgents(State state)
-        {
-            foreach (Agent agent in allAgents)
-            {
-                int random = rand.Next(7);
-
-                if (agent.State == state)
-                {
-                    agent.Move(random, allAgents);
-                }
-            }
         }
 
         private void SpreadInfection()

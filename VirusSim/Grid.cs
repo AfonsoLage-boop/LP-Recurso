@@ -30,21 +30,20 @@ namespace VirusSim
             grid[agent.Pos.X, agent.Pos.Y] = agent.State;
         }
 
-        public void MoveAgent(int oldX, int oldY, Agent agent,
-            Agent[] allAgents)
+        public void MoveAgent(int oldX, int oldY, Agent agent, Agent[] allA)
         {
             // Cycles through all agents.
-            foreach (Agent other in allAgents)
+            foreach (Agent other in allA)
             {
                 // Agent finds himself, ignore.
                 if(other.ID == agent.ID) continue;
 
-                // Another agent is in this agent's old position.
+                // Another agent is in this agent's OLD POSITION.
                 else if(other.Pos.X == oldX && other.Pos.Y == oldY)
                 {
                     bool infected = false;
 
-                    // The other agent if infected.
+                    // The other agent is infected.
                     if(other.State == State.Infected) infected = true;
 
                     // The other agent just died.
@@ -65,7 +64,7 @@ namespace VirusSim
                 // 4th priority - no one is there.
                 else grid[oldX, oldY] = State.Null;
             }
-            // Sets this agent's state in the new location.
+            // Sets this agent's state in the NEW POSITION.
             grid[agent.Pos.X, agent.Pos.Y] = agent.State;
         }
 
