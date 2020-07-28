@@ -38,6 +38,9 @@ namespace VirusSim
 
         public void Start()
         {
+            // Controls the simulation loop.
+            bool endSimulation = false;
+
             // Current simulation turn.
             int currentTurn = 1;
 
@@ -50,9 +53,9 @@ namespace VirusSim
             // First message, presents number of agents.
             ui.StartMsg((int)v.Size, (int)v.Agents);
 
-            // Game Loop, ends when the user's set number of turns is reached
-            // or if all the simulation agents die.
-            while (currentTurn <= v.Turns)
+            // Game Loop, runs while endSimulation returns false, checked in
+            // the end of every turn.
+            while (!endSimulation)
             {
                 // Cycles through all the agents.
                 foreach (Agent agent in allAgents)
@@ -89,27 +92,27 @@ namespace VirusSim
 
                 // If v.Save == True, data in a line is queued for later.
                 if (v.Save) data.Enqueue(DataLine(cHealthy, cInfected, cDead));
-
+                
                 // If v.View == True, updates display.
                 if (v.View)
                 {
                     // Waits a second.
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(800);
 
                     // Improvised console clear for Git Bash.
                     ui.Clear();
 
-                    // Shows line stats.
+                    // Show line stats.
                     ui.ShowStats(currentTurn, cHealthy, cInfected, cDead);
                     
                     // Renders the grid.
                     ui.RenderGrid(grid);
                 }
-                // Only shows line stats.
+                // Only show line stats.
                 else ui.ShowStats(currentTurn, cHealthy, cInfected, cDead);
 
                 // Check if simulation can end.
-                if (IsOver(currentTurn, cHealthy, cInfected)) break;
+                endSimulation = IsOver(currentTurn - 1, cHealthy, cInfected);
 
                 // Increase current turn by one.
                 currentTurn++;
@@ -150,7 +153,7 @@ namespace VirusSim
 
                 if (agent.State == state)
                 {
-                    agent.Move(random);
+                    agent.Move(random, allAgents);
                 }
             }
         }
@@ -216,7 +219,7 @@ namespace VirusSim
 
             else if (turn > 5 && infected == 0)
             {
-                ui.InfectEndMsg(turn);
+                ui.InfectEndMsg(turn, healthy);
                 return true;
             }
             return false;

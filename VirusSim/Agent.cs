@@ -30,14 +30,20 @@ namespace VirusSim
 
         public void Contaminate(Agent[] allAgents)
         {
+            // Cycles through all agents.
             foreach (Agent victim in allAgents)
             {
+                // Infected agent finds himself, ignore.
                 if (ID == victim.ID) continue;
                 
+                // Infected agent finds victim in the same position.
                 else if (Pos.X == victim.Pos.X && Pos.Y == victim.Pos.Y &&
                     victim.State == State.Healthy)
                 {
+                    // Victim becomes infected.
                     victim.State = State.Infected;
+                    
+                    // Update agent info to grid.
                     grid.PlaceAgent(victim);
                 }
             }
@@ -58,7 +64,7 @@ namespace VirusSim
             grid.PlaceAgent(this);
         }
 
-        public void Move(int random)
+        public void Move(int random, Agent[] allAgents)
         {
             int oldX      = Pos.X;
             int oldY      = Pos.Y;
@@ -143,7 +149,7 @@ namespace VirusSim
                     else random = 0;
                 }
             }
-            grid.MoveAgent(oldX, oldY, this);
+            grid.MoveAgent(oldX, oldY, this, allAgents);
         }
 
         public override string ToString()
