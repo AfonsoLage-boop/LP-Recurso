@@ -35,7 +35,7 @@ namespace VirusSim
                 if (ID == victim.ID) continue;
                 
                 else if (Pos.X == victim.Pos.X && Pos.Y == victim.Pos.Y &&
-                    victim.State != State.Dead)
+                    victim.State == State.Healthy)
                 {
                     victim.State = State.Infected;
                     grid.PlaceAgent(victim);
@@ -47,6 +47,14 @@ namespace VirusSim
         {
             // Updates Agent to Dead State.
             State = State.Dead;
+            grid.PlaceAgent(this);
+        }
+
+        public void Remove()
+        {
+            // Updates Agent to Null State.
+            State = State.Null;
+            HP = -1;
             grid.PlaceAgent(this);
         }
 
@@ -142,11 +150,12 @@ namespace VirusSim
         {
             // Saves the initial of each State.
             string s = "";
-            if (State == State.Healthy) s = "H";
+            if      (State == State.Healthy)  s = "H";
             else if (State == State.Infected) s = "I";
-            else if (State == State.Dead) s = "D";
+            else if (State == State.Dead)     s = "D";
+            else if (State == State.Null)     s = "N";
 
-            return $"(D) {s}{ID,-3}:{HP,3}: {Pos}";
+            return $"(D) {s}{ID,-3}:{HP,3}:{Pos}";
         }
     }
 }

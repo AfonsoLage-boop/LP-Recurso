@@ -11,6 +11,7 @@ namespace VirusSim
         string yellow   = "\u001b[33m";
         string yellowBG = "\u001b[43m";
         string whiteBG  = "\u001b[47m";
+        string blackBG  = "\u001b[40m";
         string reset    = "\u001b[0m";
         string bold     = "\u001b[1m";
 
@@ -109,7 +110,7 @@ namespace VirusSim
                     switch (grid.GetState(i, j))
                     {
                         case State.Null:
-                            Console.Write($"  ");
+                            Console.Write($"{blackBG}  {reset}");
                             break;
 
                         case State.Healthy:

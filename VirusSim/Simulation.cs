@@ -57,35 +57,38 @@ namespace VirusSim
                 // Cycles through all the agents.
                 foreach (Agent agent in allAgents)
                 {
+                    // Checks if the currentTurn is the infection Turn and if
+                    // the current agent is who should be infected.
+                    if (currentTurn == v.TInfect && randomAgentID == agent.ID)
+                    {
+                        agent.Infect();
+                    }
+
                     // Removes 1HP if agent is Infected.
                     if (agent.State == State.Infected) agent.HP -= 1; 
 
-                    // Kills all agents with 0 HP remaining.
-                    if (agent.HP == 0) agent.Die();
-
-                    // If its the infection turn and the agent is the randomly
-                    // selected one earlier to be infected.
-                    if (currentTurn == v.TInfect && randomAgentID == agent.ID)
-                    {
-                        // Updates the agent state to infected.
-                        agent.Infect();
-                    }
+                    // Remove Dead agents from previous round from grid.
+                    if (agent.State == State.Dead) agent.Remove();
                 }
 
                 // Moves every agent that is alive in a random direction.
-                MoveAgents();
+                // First we move the healthy ones, then the infected.
+                // This way, infected squares always stay above healthy ones.
+                MoveAgents(State.Healthy);
+                MoveAgents(State.Infected);
 
-                // If one agent is infected, all other agents in his
-                // position also become infected.
+                // If one agent is infected, all other agents in his position
+                // also become infected.
                 SpreadInfection();
 
-                // Count Healthy, Infected and Dead agents.
-                CountAgents(out int countHealthy, out int countInfected, 
-                    out int countDead);
+                // Kills all agents with 0 HP remaining.
+                KillAgents();
 
-                // If v.Save == True, data is queued in a line for later.
-                if (v.Save) data.Enqueue(DataLine(countHealthy, countInfected, 
-                    countDead));
+                // Count Healthy, Infected and Dead agents.
+                CountAgents(out int cHealthy, out int cInfected, out int cDead);
+
+                // If v.Save == True, data in a line is queued for later.
+                if (v.Save) data.Enqueue(DataLine(cHealthy, cInfected, cDead));
 
                 // If v.View == True, updates display.
                 if (v.View)
@@ -97,18 +100,16 @@ namespace VirusSim
                     ui.Clear();
 
                     // Shows line stats.
-                    ui.ShowStats(currentTurn, countHealthy, countInfected,
-                        countDead);
+                    ui.ShowStats(currentTurn, cHealthy, cInfected, cDead);
                     
                     // Renders the grid.
                     ui.RenderGrid(grid);
                 }
                 // Only shows line stats.
-                else ui.ShowStats(currentTurn, countHealthy, countInfected,
-                    countDead);
+                else ui.ShowStats(currentTurn, cHealthy, cInfected, cDead);
 
                 // Check if simulation can end.
-                if (IsOver(currentTurn, countHealthy, countInfected)) break;
+                if (IsOver(currentTurn, cHealthy, cInfected)) break;
 
                 // Increase current turn by one.
                 currentTurn++;
@@ -121,7 +122,7 @@ namespace VirusSim
                 File.WriteAllLines(v.File, data);
 
                 // Confirmation message.
-                Console.WriteLine($"\n// {v.File} exported.");
+                Console.WriteLine($"\n// Data exported to {v.File}.");
             }
         }
 
@@ -141,58 +142,62 @@ namespace VirusSim
             allAgents[id-1] = agent;
         }
 
-        private void CountAgents(out int countHealthy, out int countInfected, 
-            out int countDead)
+        private void MoveAgents(State state)
         {
-            countHealthy  = 0;
-            countInfected = 0;
-            countDead     = 0;
-
-            foreach (Agent agent in allAgents)
-            {
-                if (agent.State == State.Healthy) countHealthy++;
-                
-                else if(agent.State == State.Infected) countInfected++;
-
-                else countDead++;
-            }
-        }
-
-        private string DataLine(int countHealthy, int countInfected, 
-            int countDead)
-        {
-            // Separates all data with tabs.
-            string data = $"{countHealthy}" + "\t" + $"{countInfected}" + "\t" +
-                $"{countDead}";
-
-            return data;
-        }
-
-        private void MoveAgents()
-        {
-            
             foreach (Agent agent in allAgents)
             {
                 int random = rand.Next(7);
 
-                if (agent.State == State.Healthy || 
-                    agent.State == State.Infected)
+                if (agent.State == state)
                 {
                     agent.Move(random);
                 }
             }
-            
         }
 
         private void SpreadInfection()
         {
-            foreach (Agent agentInf in allAgents)
+            foreach (Agent agent in allAgents)
             {
-                if (agentInf.State == State.Infected)
+                if (agent.State == State.Infected)
                 {
-                    agentInf.Contaminate(allAgents);
+                    agent.Contaminate(allAgents);
                 }
             }
+        }
+
+        private void KillAgents()
+        {
+            foreach (Agent agent in allAgents)
+            {
+                if (agent.HP == 0) agent.Die();
+            }
+        }
+
+        private void CountAgents(out int cHealthy, out int cInfected, 
+            out int cDead)
+        {
+            cHealthy  = 0;
+            cInfected = 0;
+            cDead     = 0;
+
+            foreach (Agent agent in allAgents)
+            {
+                if (agent.State == State.Healthy) cHealthy++;
+                
+                else if(agent.State == State.Infected) cInfected++;
+
+                else cDead++;
+            }
+        }
+
+        private string DataLine(int cHealthy, int cInfected, int cDead)
+        {
+            // Separates all data with tabs.
+            string data = $"{cHealthy}" + "\t" + $"{cInfected}" + "\t" +
+                $"{cDead}";
+
+            return data;
         }
 
         private bool IsOver(int turn, int healthy, int infected)
