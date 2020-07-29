@@ -160,8 +160,8 @@ namespace VirusSim
                 // Only shows line stats.
                 else ui.ShowStats(currentTurn, cHealthy, cInfected, cDead);
 
-                // Checks if simulation can end.
-                endSimulation = IsOver(currentTurn - 1, cHealthy, cInfected);
+                // Check if simulation can end.
+                endSimulation = IsOver(currentTurn , cHealthy, cInfected);
 
                 // Increases current turn by one.
                 currentTurn++;
