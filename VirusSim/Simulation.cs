@@ -122,19 +122,18 @@ namespace VirusSim
                 }
 
                 ////////////////////////////////////////////////////////////////
-                // Both of these next methods are out of the agents loop      //
-                // above so that the states they update (infected and dead)   //
+                // Both of these following methods are outside of the agents  //
+                // loop so that the states they update (infected and dead)    //
                 // can overlap, respectively, other grid states in the same   //
                 // position, allowing for a more accurate grid view.          //
-                                                                              //
-                // If one agent is infected, all healthy ones in his          //
-                // position also become infected.                             //
-                SpreadInfection();                                            //
-                                                                              //
-                // Kills all agents with 0 HP remaining.                      //
-                KillAgents();                                                 //
-                                                                              //
                 ////////////////////////////////////////////////////////////////
+
+                // If one agent is infected, all healthy ones in his
+                // position also become infected.
+                SpreadInfection();
+
+                // Kills all agents with 0 HP remaining.
+                KillAgents();
 
                 // Count current Healthy, Infected and Dead agents.
                 CountAgents(out int cHealthy, out int cInfected, out int cDead);
