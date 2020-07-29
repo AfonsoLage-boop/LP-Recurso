@@ -1,5 +1,5 @@
 
-# Virus Simulator
+# Virus Simulation - Social Distance Edition
 
 Resolução do projeto de recurso de LP1 2019/2020
 
@@ -17,21 +17,27 @@ Este [repositório] é composto pelos seguintes elementos:
 
 |Afonso                 |André                  |
 |:---------------------:|:---------------------:|
-|States (Base)          |Programa Base          |
-|Criação da Grid        |Fazer a board          |
-|Sistema de Coordenadas |_Intro Screen_         |
-|Criação de Agentes     |Movimentação das peças |
-|Contagem de Agentes    |_Beautification_       |
-|Movimentação (Base)    |README                 |
-|Vida de agentes        |README                 |
-|README                 |README                 |
-
-
+|States (Base)          |                       |
+|Criação da Grid        |                       |
+|Sistema de Coordenadas |                       |
+|Criação de Agentes     |                       |
+|Contagem de Agentes    |                       |
+|Movimentação (Base)    |                       |
+|Vida de agentes        |                       |
+|README                 |                       |
 
 ## Arquitetura da solução
 
 ### Descrição da Solução
 
+O programa inicia no método ``Main()``, dentro da classe ``[Program]``. Dentro do
+ ``Main()``começa-se por criar uma instância de ``[UserInterface]`` e de
+ ``[Variables]`` que ficam disponíveis através das propriedades estáticas UI e v
+ , respetivamente. De seguida tratam-se dos argumentos através da do método
+ ``ValidadeVars()`` que consta na classe ``[Variables]``. Caso os argumentos
+ sejam inválidos o método ``InsufArgsMsg()`` corre e aparece uma mensagem de
+ erro, caso contrário o programa inicia correndo o método ``Start()`` que se
+ encontra na classe ``[Simulation]``.  
 
 
 ### Diagrama UML
@@ -56,17 +62,20 @@ Este [repositório] é composto pelos seguintes elementos:
 
 * Universidade: [Universidade Lusófona de Humanidades e Tecnologias][ULHT]
 
-[repositório]:https://github.com/AfonsoLage-boop/LP-Recurso
-[Zombies vs Humanos - Nuno Fachada]:
-https://github.com/VideojogosLusofona/lp1_2018_p2_solucao
-[Wait one second in running program - Stackoverflow]:
-https://stackoverflow.com/questions/10458118/wait-one-second-in-running-program
-[Int32.TryParse Method - Microsoft docs]:
-https://docs.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=netcore-3.1
-[ANSI colors - Haoyi's Programming Blog]:
-https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#decorations
-[String.Contains Method - Microsoft docs]:
-https://docs.microsoft.com/pt-br/dotnet/api/system.string.contains?view=netcore-3.1
+[Program]: https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/Program.cs
+[UserInterface]: https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/UserInterface.cs
+[Variables]: https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/Variables.cs
+[Simulation]: https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/Simulation.cs
+[Agent]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/Agent.cs
+[Coords]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/Coords.cs
+[Grid]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/Grid.cs
+[State]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/State.cs
+[repositório]: https://github.com/AfonsoLage-boop/LP-Recurso
+[Zombies vs Humanos - Nuno Fachada]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao
+[Wait one second in running program - Stackoverflow]:https://stackoverflow.com/questions/10458118/wait-one-second-in-running-program
+[Int32.TryParse Method - Microsoft docs]:https://docs.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=netcore-3.1
+[ANSI colors - Haoyi's Programming Blog]:https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#decorations
+[String.Contains Method - Microsoft docs]:https://docs.microsoft.com/pt-br/dotnet/api/system.string.contains?view=netcore-3.1
 [Afonso Lage (a21901381)]:https://github.com/AfonsoLage-boop
 [André Santos (a21901767)]:https://github.com/andrepucas
 [Nuno Fachada]:https://github.com/fakenmc
