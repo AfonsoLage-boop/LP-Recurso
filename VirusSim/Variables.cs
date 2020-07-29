@@ -61,8 +61,8 @@ namespace VirusSim
         public string File {get; private set;}
 
         /// <summary>
-        /// Private constructor that instantiates this struct with the 
-        /// command line arguments, if all are valid.
+        /// Private constructor that creates a new set of variables based on  
+        /// the command line arguments, if all are valid.
         /// </summary>
         /// <param name="size">Grid dimensions.</param>
         /// <param name="agents">Number of agents.</param>

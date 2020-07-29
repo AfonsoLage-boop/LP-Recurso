@@ -5,8 +5,8 @@ using System.Collections.Generic;
 namespace VirusSim
 {
     /// <summary>
-    /// <c>Simulation</c> Class. Contains the simulation loop and other 
-    /// auxiliar simulation methods.
+    /// <c>Simulation</c> Class.
+    /// Contains the simulation loop and other auxiliar simulation methods.
     /// </summary>
     public class Simulation
     {
@@ -21,7 +21,7 @@ namespace VirusSim
         private UserInterface ui;
 
         /// <summary>
-        /// Grid where simulation will be visualized.
+        /// Reference to the grid where the simulation will be visualized.
         /// </summary>
         private Grid grid;
 
@@ -36,7 +36,7 @@ namespace VirusSim
         private Random rand;
         
         /// <summary>
-        /// Constructor, instantiates this class.
+        /// Constructor method, instantiates a new simulation.
         /// </summary>
         /// <param name="v">Simulation variables.</param>
         public Simulation(Variables v)
@@ -173,7 +173,7 @@ namespace VirusSim
                 File.WriteAllLines(v.File, data);
 
                 // Confirmation message.
-                Console.WriteLine($"\n// Data exported to {v.File}.");
+                ui.Exported(v.File);
             }
         }
 
