@@ -38,7 +38,7 @@ O programa inicia no método `Main()`, dentro da classe [`Program`]. Aqui,
  argumentos forem válidos, então estes são guardados na forma de propriedades
  dentro de [`Variables`]e o método retorna **True**, que consequentemente
  cria uma nova instância da classe [`Simulation`] e invoca o método `Start()`,
- que dá [inicio à simulação](###funcionamento-de-cada-turno).
+ que dá [inicio à simulação](#funcionamento-de-cada-turno).
 
 Quando [`Simulation`], a classe central do programa, é instanciada esta faz uma
  copia do conjunto de [`Variables`] para uma instância local, e instância ainda:
@@ -129,7 +129,7 @@ Como solução, no método `MoveAgents()` criou-se um loop que passa por todos o
   ```
 
   * Movimenta todos os agentes vivos numa direção aleatória ([tendo em atenção
-     todos os outros agentes](####classe-grid)).
+     todos os outros agentes](#classe-grid)).
 
   ```c#
   agent.Move(random, allAgents) // Este método vai verificar se o movimento
