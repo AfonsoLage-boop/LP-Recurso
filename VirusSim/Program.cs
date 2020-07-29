@@ -42,10 +42,10 @@
         /// </c></example></param>
         static void Main(string[] args)
         {
-            // Instantiates UserInterface so thats its methods are accessible.
+            // Instantiates UserInterface so that its methods are accessible.
             UserInterface ui = new UserInterface();
 
-            // Instantiates a new set of Variables, which will save handle
+            // Instantiates a new set of Variables, which will handle
             // and save all arguments passed here.
             Variables v = new Variables();
 
