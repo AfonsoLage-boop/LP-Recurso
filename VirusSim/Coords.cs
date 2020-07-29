@@ -1,10 +1,10 @@
 namespace VirusSim
 {
     /// <summary>
-    /// <c>Coords</c> Struct.
+    /// <c>Coords</c> Class.
     /// Creates grid positions.
     /// </summary>
-    public struct Coords
+    public class Coords
     {
         /// <summary>
         /// Self implemented property that stores a grid Row value.
