@@ -26,7 +26,7 @@
         /// <description>Agents' health (in turns).</description>
         /// </item>
         /// <item><term>-Tinf</c></term>
-        /// <description>First infected (turn).</description>
+        /// <description>First infected turn.</description>
         /// </item>
         /// <item><term>-T</c></term>
         /// <description>Number of total turns.</description>
@@ -51,10 +51,13 @@
 
             // Sends all the command line arguments to the variables class, 
             // where they will then be validated and saved.
-            // If validated, the program is redirected to start the simulation.
+            // If valid, the program is redirected to start the simulation.
             if (v.ValidateVars(args))
             {
+                // Instantiates a new simulation.
                 Simulation sim = new Simulation(v);
+
+                // Starts simulation.
                 sim.Start();
             }
 
