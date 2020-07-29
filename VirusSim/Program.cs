@@ -19,9 +19,6 @@
         /// <item><term>-M</c></term>
         /// <description>Number of agents.</description>
         /// </item>
-        /// <item><term>-M</c></term>
-        /// <description>Number of agents.</description>
-        /// </item>
         /// <item><term>-L</c></term>
         /// <description>Agents' health (in turns).</description>
         /// </item>

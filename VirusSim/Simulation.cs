@@ -191,7 +191,7 @@ namespace VirusSim
             Agent agent;
 
             // Within the grid limits, agent gets a random starting position.
-            pos   = new Coords(rand.Next((int)v.Size), rand.Next((int)v.Size));
+            pos = new Coords(rand.Next((int)v.Size), rand.Next((int)v.Size));
 
             // Creates an agent with an unique ID, health value, random
             // position and grid reference.
