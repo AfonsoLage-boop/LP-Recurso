@@ -2,31 +2,95 @@ using System;
 
 namespace VirusSim
 {
+    /// <summary>
+    /// <c>Variables</c> Struct.
+    /// Handles all command line arguments, validating them.
+    /// If valid, the arguments are then stored in accessible properties.
+    /// </summary>
     public struct Variables
     {
-        public int    Size     {get; private set;}
-        public int    Agents   {get; private set;}
-        public int    AgentsHP {get; private set;}
-        public int    TInfect  {get; private set;}
-        public int    Turns    {get; private set;}
-        public bool   View     {get; private set;}
-        public bool   Save     {get; private set;}
-        public string File     {get; private set;}
+        /// <summary>
+        /// Self implemented property that stores the grid dimensions.
+        /// </summary>
+        /// <value>Dimension of simulation grid.</value>
+        public int Size {get; private set;}
 
+        /// <summary>
+        /// Self implemented property that stores the number of agents.
+        /// </summary>
+        /// <value>Number of agents.</value>
+        public int Agents {get; private set;}
+
+        /// <summary>
+        /// Self implemented property that stores the agents' health (in turns).
+        /// </summary>
+        /// <value>Number of agents' health (in turns).</value>
+        public int AgentsHP {get; private set;}
+
+        /// <summary>
+        /// Self implemented property that stores the first infected turn.
+        /// </summary>
+        /// <value>Number of first infected turn.</value>
+        public int TInfect {get; private set;}
+
+        /// <summary>
+        /// Self implemented property that stores the number of total turns.
+        /// </summary>
+        /// <value>Number of total turns.</value>
+        public int Turns {get; private set;}
+
+        /// <summary>
+        /// Self implemented property that stores a boolean that controls if 
+        /// the simulation is to be visualized.
+        /// </summary>
+        /// <value><c>True</c> if is to be visualized.</value>
+        public bool View {get; private set;}
+
+        /// <summary>
+        /// Self implemented property that stores a boolean that controls if 
+        /// the simulation data is to be exported in the end.
+        /// </summary>
+        /// <value><c>True</c> if is to be exported.</value>
+        public bool Export {get; private set;}
+
+        /// <summary>
+        /// Self implemented property that stores the file to where the data 
+        /// will be exported to.
+        /// </summary>
+        /// <value>Export file name.</value>
+        public string File {get; private set;}
+
+        /// <summary>
+        /// Private constructor that instantiates this struct with the 
+        /// command line arguments, if all are valid.
+        /// </summary>
+        /// <param name="size">Grid dimensions.</param>
+        /// <param name="agents">Number of agents.</param>
+        /// <param name="agentsHP">Number of agents' health (in turns).</param>
+        /// <param name="tInfect">Number of first infected turn.</param>
+        /// <param name="turns">Number of total turns.</param>
+        /// <param name="view">Is to be visualized.</param>
+        /// <param name="export">Is to be exported.</param>
+        /// <param name="file">Export file name.</param>
         private Variables(int size, int agents, int agentsHP, int tInfect,
-            int turns, bool view, bool save, string file)
+            int turns, bool view, bool export, string file)
         {
-            // Saves all variables.
+            // Saves all the variables values in the properties.
             Size     = size;
             Agents   = agents;
             AgentsHP = agentsHP;
             TInfect  = tInfect;
             Turns    = turns;
             View     = view;
-            Save     = save;
+            Export   = export;
             File     = file;
         }
 
+        /// <summary>
+        /// Validates the arguments passed in <c>Main</c> Class.
+        /// </summary>
+        /// <param name="args">Command line arguments.</param>
+        /// <returns><c>True</c> if all arguments are valid</returns>
         public bool ValidateVars(string[] args)
         {
             // Cycles through all arguments given.
@@ -50,7 +114,11 @@ namespace VirusSim
                     // exception.
                     else break;
                 }
-                // The same process is repeated for all the other key arguments.
+
+                ////////////////////////////////////////////////////////////////
+                // The same process is repeated for all these next arguments. //
+                ////////////////////////////////////////////////////////////////
+
                 else if (args[i].Equals("-m",
                     StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -92,19 +160,20 @@ namespace VirusSim
                     else break;
                 }
 
-                // Checks View as True..
+                // Stores View as True.
                 else if (args[i].Equals("-v",
                     StringComparison.InvariantCultureIgnoreCase))
                 {
                     View = true;
                 }
 
-                // Checks Save as True and saves a file name.
+                // Stores Export as True and creates a default file name.
                 else if (args[i].Equals("-o",
                     StringComparison.InvariantCultureIgnoreCase))
                 {
+                    Export = true;
+
                     // Default file name.
-                    Save = true;
                     File = "simulationData.tsv";
                 }
                 

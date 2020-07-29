@@ -162,7 +162,7 @@ namespace VirusSim
             else if (State == State.Dead)     s = "D";
             else if (State == State.Null)     s = "N";
 
-            return $"(D) {s}{ID,-3}:{HP,3}:{Pos}";
+            return $"(D) {s}{ID,-3}:{Pos}:{HP,3}";
         }
     }
 }

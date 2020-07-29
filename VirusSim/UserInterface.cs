@@ -31,7 +31,7 @@ namespace VirusSim
             Console.WriteLine(
                 $"{yellow} -L{reset}    > agents' health (in turns)");
             Console.WriteLine(
-                $"{yellow} -Tinf{reset} > first infected (turn)");
+                $"{yellow} -Tinf{reset} > first infected turn");
             Console.WriteLine(
                 $"{yellow} -T{reset}    > number of total turns");
 
