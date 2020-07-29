@@ -1,5 +1,5 @@
 
-# Virus Simulation - Social Distance Edition
+# Virus Simulation - Social Distancing Edition
 
 Resolução do projeto de recurso de LP1 2019/2020
 
@@ -7,24 +7,24 @@ Resolução do projeto de recurso de LP1 2019/2020
 
 Este [repositório] é composto pelos seguintes elementos:
 
-* O código C# que compõe o nosso programa;
-* A divisão do projeto pelos membros do grupo;
-* A arquitetura do programa;
-* Diagrama UML;
+* Código C# que compõe o nosso programa.
+* Divisão do projeto pelos membros do grupo.
+* Arquitetura do programa.
+* Diagrama UML.
 * Referências.
   
 ### Divisão de trabalho no projeto
 
 |Afonso                 |André                  |
 |:---------------------:|:---------------------:|
-|States (Base)          |                       |
-|Criação da Grid        |                       |
-|Sistema de Coordenadas |                       |
-|Criação de Agentes     |                       |
-|Contagem de Agentes    |                       |
-|Movimentação (Base)    |                       |
-|Vida de agentes        |                       |
-|README                 |                       |
+|States (Base)          |Variables.cs           |
+|Criação da Grid        |Simulation.cs (Base)   |
+|Sistema de Coordenadas |Exporting data file    |
+|Criação de Agentes     |UserInterface.cs       |
+|Contagem de Agentes    |Agent.cs Rework        |
+|Movimentação (Base)    |Render live Simulation |
+|Vida de agentes        |Agents moving in grid  |
+|README                 |XML Documentation      |
 
 ## Arquitetura da solução
 
@@ -39,7 +39,6 @@ O programa inicia no método ``Main()``, dentro da classe ``[Program]``. Dentro 
  erro, caso contrário o programa inicia correndo o método ``Start()`` que se
  encontra na classe ``[Simulation]``.  
 
-
 ### Diagrama UML
 
 ![UML](UML.png "UML")
@@ -47,15 +46,15 @@ O programa inicia no método ``Main()``, dentro da classe ``[Program]``. Dentro 
 ## Referências
 
 * [Zombies vs Humanos - Nuno Fachada]
-* [Wait one second in running program - Stackoverflow]
+* [Wait one second in running program - StackOverflow]
 * [Int32.TryParse Method - Microsoft Docs]
 * [ANSI colors - Haoyi's Programming Blog]
 * [String.Contains Method - Microsoft Docs]
-  
+
 ## Metadados
 
 * Autores: [Afonso Lage (a21901381)], [André Santos (a21901767)]
-  
+
 * Professor: [Nuno Fachada]
 
 * Curso: [Licenciatura em Videojogos]
@@ -72,7 +71,7 @@ O programa inicia no método ``Main()``, dentro da classe ``[Program]``. Dentro 
 [State]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/State.cs
 [repositório]: https://github.com/AfonsoLage-boop/LP-Recurso
 [Zombies vs Humanos - Nuno Fachada]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao
-[Wait one second in running program - Stackoverflow]:https://stackoverflow.com/questions/10458118/wait-one-second-in-running-program
+[Wait one second in running program - StackOverflow]:https://stackoverflow.com/questions/10458118/wait-one-second-in-running-program
 [Int32.TryParse Method - Microsoft docs]:https://docs.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=netcore-3.1
 [ANSI colors - Haoyi's Programming Blog]:https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#decorations
 [String.Contains Method - Microsoft docs]:https://docs.microsoft.com/pt-br/dotnet/api/system.string.contains?view=netcore-3.1
