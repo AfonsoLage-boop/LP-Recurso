@@ -7,6 +7,7 @@ Resolução do projeto de recurso de LP1 2019/2020
 Este [repositório] é composto pelos seguintes elementos:
 
 * Código C# que compõe o nosso programa.
+* Intruções de funcionamento da simulação.
 * Divisão do projeto pelos membros do grupo.
 * Arquitetura do programa.
 * Diagrama UML.
@@ -24,6 +25,31 @@ Este [repositório] é composto pelos seguintes elementos:
 |Movimentação (Base)    |Render live Simulation |
 |Vida de agentes        |Agents moving in grid  |
 |README                 |XML Documentation      |
+
+## Funcionamento da Simulação
+
+Depois de transferida a [pasta VirusSim], abrir a mesma na consola
+ (nós usámos o [Git Bash]).
+ 
+O programa aceita as seguintes opções na linha de comando:
+
+**Obrigatórias:**
+* `-N` - Dimensões da grelha de simulação _N x N_.
+* `-M` - Número de agentes inicialmente na simulação.
+* `-L` - Tempo de vida de um agente (em turnos) após ter sido infetado.
+* `-Tinf` - Turno em que ocorre a primeira infeção.
+* `-T` - Número máximo de turnos.
+
+**Opcionais**
+* `-v` - Opção que ativa a visualização da simulação.
+* `-o` - Opção que indica um ficheiro no qual serão gravadas as estatísticas
+  da simulação em cada turno.
+
+Um exemplo de execução:
+
+```
+dotnet run -- -N 50 -M 100 -L 10 -Tinf 5 -T 1000 -v -o stats.tsv
+```
 
 ## Arquitetura da solução
 
@@ -217,6 +243,8 @@ Como solução, no método `MoveAgents()` criou-se um loop que passa por todos o
 [`Grid`]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/Grid.cs
 [`State`]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim/State.cs
 [repositório]: https://github.com/AfonsoLage-boop/LP-Recurso
+[pasta VirusSim]:https://github.com/AfonsoLage-boop/LP-Recurso/blob/master/VirusSim
+[Git Bash]:https://gitforwindows.org/
 [Zombies vs Humanos - Nuno Fachada]:https://github.com/VideojogosLusofona/lp1_2018_p2_solucao
 [Wait one second in running program - StackOverflow]:https://stackoverflow.com/questions/10458118/wait-one-second-in-running-program
 [Int32.TryParse Method - Microsoft docs]:https://docs.microsoft.com/en-us/dotnet/api/system.int32.tryparse?view=netcore-3.1
